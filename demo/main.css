@@ -1,0 +1,158 @@
+/* main.css */
+
+body {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.stake-message {
+  color: white;
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  font-size: 1em;
+  z-index: 2;
+}
+
+.ground {
+  border: 1px solid #000000;
+  position: relative;
+  width: 400px;
+}
+
+.track {
+  background: url("./grass.webp") repeat;
+  position: relative;
+
+}
+
+.track:after {
+  display: block;
+  content: "Finish";
+  position: absolute;
+  rotate: 90deg;
+  right: -50px;
+  text-transform: uppercase;
+  top: 40%;
+}
+
+.lanes {
+  /*background-color: grey; */
+  border-left: 5px solid gold;
+  border-right: 5px solid gold;
+  overflow: hidden;
+}
+
+.lanes span {
+  margin-left: 4px;
+}
+
+.lanes > div,
+#selector-wrapper button {
+  border: 1px solid black;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding-left: 2px;
+}
+
+.lanes > div.active,
+#selector-wrapper button:hover {
+  border-color: gold !important;
+  color: gold;
+}
+
+.lanes > div {
+  height: 20px;
+  width: 0;
+}
+
+.lanes > div span {
+  padding-left: 5px;
+  position: absolute;
+}
+
+#selector-wrapper button {
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 1.2em;
+  min-width: 40px;
+  padding: 4px 8px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+#selector-wrapper.disabled button {
+  opacity: 50%;
+}
+
+.lanes div:nth-child(1),
+#selector-wrapper button:nth-child(1) {
+  background-color: black;
+  border-color: black;
+}
+.lanes div:nth-child(2),
+#selector-wrapper button:nth-child(2) {
+  background-color: blue;
+  border-color: black;
+}
+.lanes div:nth-child(3),
+#selector-wrapper button:nth-child(3) {
+  background-color: red;
+  border-color: black;
+}
+.lanes div:nth-child(4),
+#selector-wrapper button:nth-child(4) {
+  background-color: magenta;
+  border-color: black;
+}
+.lanes div:nth-child(5),
+#selector-wrapper button:nth-child(5) {
+  background-color: green;
+  border-color: black;
+}
+.lanes div:nth-child(6),
+#selector-wrapper button:nth-child(6) {
+  background-color: cyan;
+  border-color: black;
+}
+.lanes div:nth-child(7),
+#selector-wrapper button:nth-child(7) {
+  background-color: yellow;
+  border-color: black;
+}
+.lanes div:nth-child(8),
+#selector-wrapper button:nth-child(8) {
+  background-color: white;
+  border-color: black;
+}
+
+button {
+  border: 1px solid black;
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+  font-size: 100%;
+  padding: 6px 12px;
+}
+
+#wallet {
+  font-size: 2em;
+}
+
+.ground label {
+  margin-left: 8px;
+}
+
+button:hover {
+  background-color: gold;
+  border-color: gold;
+  color: grey;
+}
+
+button:disabled {
+  opacity: 50%;
+}
+
+em {
+  font-size: 80%;
+}
