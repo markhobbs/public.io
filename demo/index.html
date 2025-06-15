@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Spectrum Derby :: Choose Your Lane</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Simple JavaScript Racing Game">
+	<meta name="keywords" content="HTML, CSS, JavaScript">
+	<meta name="author" content="John Doe">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/demo/main.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Spectrum Derby</h1>
+		<p>Choose your lane and select 'Race'.</p>	
+		<div class="ground">
+			<em class="stake-message">*100<sup>&nbsp;credits/race</sup></em>
+			<div class="track">
+				<div class="lanes">
+					<div id="1" class="lane"><span>1</span></div>
+					<div id="2" class="lane"><span>2</span></div>
+					<div id="5" class="lane"><span>5</span></div>
+					<div id="10" class="lane"><span>10</span></div>
+					<div id="20" class="lane"><span>20</span></div>
+					<div id="50" class="lane"><span>50</span></div>
+					<div id="100" class="lane"><span>100</span></div>
+					<div id="200" class="lane"><span>200</span></div>
+				</div>
+			</div>
+			<label for="wallet">Wallet</label><input
+				id="wallet" 
+				name="wallet"
+				type="text"
+				disabled="disabled" 
+				maxlength="5" 
+				size="5">credits remaining.
+		</div>
+		<p>Choose lane</p>
+		<div id="selector-wrapper">
+			<button 
+				name="1" 
+				class="btn-selector">1
+			</button>
+			<button 
+				name="2" 
+				class="btn-selector">
+				2
+			</button>
+			<button name="5" class="btn-selector">5</button>
+			<button name="10" class="btn-selector">10</button>
+			<button name="20" class="btn-selector">20</button>
+			<button name="50" class="btn-selector">50</button>
+			<button name="100" class="btn-selector">100</button>
+			<button name="200" class="btn-selector">200</button>
+		</div>
+		<br>
+		<button 
+			id="btn-start" 
+			disabled="disabled">
+			Race
+		</button>
+		<button 
+			id="btn-reset" 
+			disabled="disabled">
+			Reset
+		</button>
+
+		<p id="race-message"></p>
+		
+		<h2>History</h2>
+		<p id="history-wrapper"></p>
+
+		<div id="elem-graph"></div>
+		<button 
+			class="btn-warning" 
+			id="btn-reset-history" 
+			disabled="disabled">
+			Reset History
+		</button>
+	</div>
+	<script src="/demo/main.js"></script>
+</body>
+</html>
