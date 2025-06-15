@@ -8,7 +8,7 @@
     //Variables
     var betCount = 0;
     var betMax = 1;
-    var credits = 10000;
+    var credits = 1000;
     var creditsPerGame = 100;
     var currentPickValue = 0;
     var laneTrackPosition = 0;
@@ -58,9 +58,14 @@
     };
 
     function updateWalletCredits(val) {
-        var value = parseInt(elemWallet.value);
-        value += parseInt(val);
-        elemWallet.value = value;
+        //Check Input Not Updated
+        if (elemWallet.disabled) {
+            var value = parseInt(elemWallet.value);
+            value += parseInt(val);
+            elemWallet.value = value;
+        } else {
+            alert("No Bottomless Wallet Attempts! Click Browser Refresh to Start Again.")
+        }
     }
 
     var fn_update_lane_position = function() {
@@ -150,11 +155,12 @@
     }
 
     var fn_update_races_history_ui = function() {
+        var arrHistory;
+        var count = {};
         var hasHistory = localStorage.getItem("history");
         if (hasHistory) {
             btnResetRaceHistory.removeAttribute("disabled");
-            var arrHistory = JSON.parse("[" + localStorage.getItem("history") + "]");
-            var count = {};
+            arrHistory = JSON.parse("[" + localStorage.getItem("history") + "]");
             arrHistory.forEach(function(i) { count[i] = (count[i]||0) + 1;});
             elemWrapperHistory.innerHTML = JSON.stringify(count);
         } else {
