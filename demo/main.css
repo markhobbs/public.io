@@ -4,13 +4,89 @@ body {
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
-.stake-message {
-  color: white;
-  position: absolute;
-  right: 16px;
-  top: 8px;
-  font-size: 1em;
-  z-index: 2;
+h1 span {
+  border-color: #000000;
+  padding: 0 2px;
+}
+
+h1 span:nth-child(1) {
+  background-color: #000000;
+  color: #ffffff;
+}
+h1 span:nth-child(2) {
+  background-color: #0000d8;
+  color: #ffffff;
+}
+h1 span:nth-child(3) {
+  background-color: #0000ff;
+  color: #ffffff;
+}
+h1 span:nth-child(4) {
+  background-color: #d80000;
+  color: #ffffff;
+}
+h1 span:nth-child(5) {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+h1 span:nth-child(6) {
+  background-color: #d800d8;
+  color: #ffffff;
+}
+h1 span:nth-child(7) {
+  background-color: #ff00ff;
+  color: #ffffff;
+}
+h1 span:nth-child(8) {
+  background-color: #00d800;
+  color: #ffffff;
+}
+h1 span:nth-child(9) {
+  background-color: #00ff00;
+
+}
+h1 span:nth-child(10) {
+  background-color: #00d8d8;
+}
+h1 span:nth-child(11) {
+  background-color: #00ffff;
+}
+h1 span:nth-child(12) {
+  background-color: #d8d800;
+}
+h1 span:nth-child(13) {
+  background-color: #ffff00;
+}
+h1 span:nth-child(14) {
+  background-color: #d8d8d8;
+}
+
+button {
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-color: #000000;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 100%;
+  font-weight: 600;
+  margin-right: 2px; 
+  padding: 6px 12px;
+  text-transform: uppercase;
+}
+
+button:not(:disabled):hover {
+  background-color: #ffffff;
+  border-color: #000000;
+  color: #000000;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 50%;
+}
+
+em {
+  font-size: 80%;
 }
 
 .ground {
@@ -20,139 +96,105 @@ body {
 }
 
 .track {
-  background: url("./grass.webp") repeat;
+  /*background: url("./grass.webp") repeat;*/
+  background-color: #00d800;
+  background-image:
+      linear-gradient(45deg, #00d800 26%, transparent 26%), 
+      linear-gradient(135deg, #00ff00 26%, transparent 26%),
+      linear-gradient(45deg, transparent 75%, #d8d800 75%),
+      linear-gradient(135deg, transparent 75%, #00d800 75%);
+  background-size: 20px 20px; /* Must be a square */
+  background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
   position: relative;
-
 }
 
-.track:after {
-  display: block;
+.ground:after {
+  background-image:
+    linear-gradient(45deg, #d8d8d8 26%, transparent 26%), 
+    linear-gradient(135deg, #d8d8d8 26%, transparent 26%),
+    linear-gradient(45deg, transparent 75%, #d8d8d8 75%),
+    linear-gradient(135deg, transparent 75%, #d8d8d8 75%);
+  background-size: 20px 20px; /* Must be a square */
+  background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
   content: "Finish";
+  display: block;
+  font-weight: 600;
+  padding: 4px 8px;
   position: absolute;
+  right: -60px;
   rotate: 90deg;
-  right: -50px;
   text-transform: uppercase;
   top: 40%;
 }
 
-.lanes {
-  /*background-color: grey; */
-  border-left: 5px solid gold;
-  border-right: 5px solid gold;
+#lanes {
+  border-left: 5px solid #d8d800;
+  border-right: 5px solid #d8d800;
   overflow: hidden;
 }
 
-.lanes span {
-  margin-left: 4px;
-}
-
-.lanes > div,
-#selector-wrapper button {
-  border: 1px solid black;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding-left: 2px;
-}
-
-.lanes > div.active,
-#selector-wrapper button:hover {
-  border-color: gold !important;
-  color: gold;
-}
-
-.lanes > div {
+#lanes > div {
+  border: 1px solid #000000;
+  font-size: 12px;  
   height: 20px;
   width: 0;
 }
 
-.lanes > div span {
-  padding-left: 5px;
-  position: absolute;
+#lanes > div.active {
+  border-color: #d8d800 !important;
+  color: #d8d800;
 }
 
-#selector-wrapper button {
-  border: 1px solid black;
-  display: inline-block;
+#lanes > div span {
+  color: #d80000;
   font-size: 1.2em;
-  min-width: 40px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  min-width: 30px;
+  padding: 4px 8px;
+}
+
+#lanes > div.active span {
+  color: #000000;
+}
+
+#selectors-wrapper button {
+  color: #000000;
+  font-size: 1em;
+  margin-bottom: 4px;
+  min-width: 30px;
   padding: 4px 8px;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-color: #d8d8d8;
 }
 
-#selector-wrapper.disabled button {
+#selectors-wrapper.disabled button {
+  cursor: default;
   opacity: 50%;
 }
 
-.lanes div:nth-child(1),
-#selector-wrapper button:nth-child(1) {
-  background-color: black;
-  border-color: black;
-}
-.lanes div:nth-child(2),
-#selector-wrapper button:nth-child(2) {
-  background-color: blue;
-  border-color: black;
-}
-.lanes div:nth-child(3),
-#selector-wrapper button:nth-child(3) {
-  background-color: red;
-  border-color: black;
-}
-.lanes div:nth-child(4),
-#selector-wrapper button:nth-child(4) {
-  background-color: magenta;
-  border-color: black;
-}
-.lanes div:nth-child(5),
-#selector-wrapper button:nth-child(5) {
-  background-color: green;
-  border-color: black;
-}
-.lanes div:nth-child(6),
-#selector-wrapper button:nth-child(6) {
-  background-color: cyan;
-  border-color: black;
-}
-.lanes div:nth-child(7),
-#selector-wrapper button:nth-child(7) {
-  background-color: yellow;
-  border-color: black;
-}
-.lanes div:nth-child(8),
-#selector-wrapper button:nth-child(8) {
-  background-color: white;
-  border-color: black;
+#selectors-wrapper:not(.disabled) button:hover {
+  background-color: #ffffff !important;
+  border-color: #000000;
+  color: #000000;
+  -webkit-text-stroke-width: 0;
+  -webkit-text-stroke-color: transparent;
 }
 
-button {
-  border: 1px solid black;
-  background-color: grey;
-  color: white;
-  cursor: pointer;
-  font-size: 100%;
-  padding: 6px 12px;
+#selectors-wrapper button.active {
+  background-color: #ffffff !important;
 }
 
 #wallet {
-  font-size: 2em;
+  font-size: 1.8em;
+   text-align: right;
 }
 
-.ground label {
-  margin-left: 8px;
-}
-
-button:hover {
-  background-color: gold;
-  border-color: gold;
-  color: grey;
-}
-
-button:disabled {
-  opacity: 50%;
-}
-
-em {
-  font-size: 80%;
+.stake-message {
+  color: #ffffff;
+  position: absolute;
+  right: 16px;
+  top: 8px;
+  font-size: 1em;
+  z-index: 2;
 }
