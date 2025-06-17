@@ -159,20 +159,21 @@ em {
   font-weight: 600;
   margin-bottom: 4px;
   min-width: 30px;
-  padding: 4px 8px;
+  padding: 0 4px;
 }
 
 #lanes > div.active span {
   font-weight: 800;
   font-size: 1.5em;
+  background-color: #d8d800;
 }
 
 #selectors-wrapper button {
   color: #000000;
   font-size: 1em;
   margin-bottom: 2px;
-  min-height: 44px;
-  min-width: 66px;
+  min-height: 46px;
+  min-width: 72px;
 }
 
 #selectors-wrapper.disabled button {
@@ -191,7 +192,8 @@ em {
 }
 
 #selectors-wrapper button.active {
-  background-color: #ffffff !important;
+  border-color: #d8d800 !important;
+  border-width: 5px;
 }
 
 #wallet {
