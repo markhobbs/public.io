@@ -9,7 +9,8 @@
     var curValue = 0;
     var laneTrackPosition = 0;
     var laneTrackLengthMax = 400;
-    var intervalId = null;
+    var intervalIdAutoReset = null;
+    var intervalIdRace = null;
     var isRunning = false;
 
     // DOM Elements
@@ -131,7 +132,7 @@
             } else {
                 var curName = elemLanes[i].getElementsByTagName('span')[0].innerHTML;
                 var winnerId = elemLanes[i].getAttribute("id");
-                clearInterval(intervalId);
+                clearInterval(intervalIdRace);
                 fn_message(winnerId, curValue, curName);
                 fn_history_store(winnerId);
                 break;
@@ -169,7 +170,7 @@
     }
 
     function fn_message(winId, val, name) {
-        var strMessageReset = "<p>Select 'Reset' to Try Again.</p>";
+        var strMessageReset = "<p>Race Will Reset Automatically in 10 Seconds.</p>";
         var strMessageWin = "Hooray <strong class='upper'>" +
             name +
             "</strong> is the Winner! You Won <strong>" +
@@ -178,7 +179,7 @@
             strMessageReset;
         var strMessageLoss = "<strong class='upper'>" +
             name +
-            "</strong> Won the Race! You Lose <strong>" + val +
+            "</strong> is the Winner! You Lose <strong>" + val +
             "</strong> Credits.</p>" +
             strMessageReset;
         if (winId === val) {
@@ -189,6 +190,7 @@
             fn_wallet_ui(-val);
         }
         btnRaceReset.removeAttribute("disabled");
+        intervalIdAutoReset = setInterval(fn_race_reset, 10000);
     }
 
     function fn_race_lane() {
@@ -204,13 +206,14 @@
                 alert("Only 1 Bet Per Race! Select Reset to Choose Again.");
             }
         } else {
-            alert("No Bets! Reset Required.");
+            alert("No Bets Please! Race in Progress.");
         }
     }
 
     function fn_race_reset() {
+        clearInterval(intervalIdRace);
+        clearInterval(intervalIdAutoReset);
         var value = parseInt(elemWallet.value, 10);
-        clearInterval(intervalId);
         if (value > 0) {
             isRunning = false;
             fn_race_reset_buttons();
@@ -222,8 +225,8 @@
 
     function fn_race_start() {
         isRunning = true;
-        intervalId = setInterval(fn_race_positions, 500);
-        elemMessage.innerHTML = "Race in Progress.";
+        intervalIdRace = setInterval(fn_race_positions, 500);
+        elemMessage.innerHTML = "No Bets Please! Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
