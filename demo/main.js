@@ -1,22 +1,5 @@
 // main.js
 // Simple JS Racing Game (ES5)
-/* Spectrum Colors
-    #000000
-    #0000d8
-    #0000ff
-    #d80000
-    #ff0000
-    #d800d8
-    #ff00ff
-    #00d800
-    #00ff00
-    #00d8d8
-    #00ffff
-    #d8d800
-    #ffff00
-    #d8d8d8
-    #ffffff
-*/
 
 (function() {
     // State variables
@@ -114,7 +97,7 @@
         var hasHistory = storage.getItem("history");
         if (hasHistory) {
             btnHistoryReset.removeAttribute("disabled");
-            arrHistory = storage.getItem("history");
+            arrHistory = JSON.parse("[" + storage.getItem("history") + "]");
             for (var i = 0; i < arrHistory.length; i++) {
                 var item = arrHistory[i];
                 count[item] = (count[item] || 0) + 1;
