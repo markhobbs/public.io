@@ -48,10 +48,10 @@
 
     //Competitors
     var competitors = {
-        200: { color: "#000000", name: "black" },
-        100: { color: "#0000ff", name: "blue" },
-        50: { color: "#ff0000", name: "red" },
-        20: { color: "#ff00ff", name: "magenta" },
+        200: { color: "#000000", dark: true, name: "black" },
+        100: { color: "#0000ff", dark: true,  name: "blue" },
+        50: { color: "#ff0000", dark: true,  name: "red" },
+        20: { color: "#ff00ff", dark: true,  name: "magenta" },
         50: { color: "#ff0000", name:"red" }, 
         20: { color: "#ff00ff", name:"magenta" }, 
         10: { color: "#00ff00", name:"green" }, 
@@ -222,8 +222,14 @@
         var htmlLanes = "", htmlSelectors = "";
         for (var x in competitors) {
             if (competitors.hasOwnProperty(x)) {
-                htmlLanes += '<div style="background-color: ' + competitors[x]['color'] + '" id="' + x + '" class="lane"><span>' + competitors[x]['name'] + '</span></div>';
-                htmlSelectors += '<button style="background-color: ' + competitors[x]['color'] + '" name="' + x + '" class="btn-selector">' + x + '<sup>c</sup></button>';
+                var strClass;
+                if (competitors[x]['dark'] === true) {
+                    strClass = "dark";
+                } else {
+                    strClass = "";
+                }
+                htmlLanes += '<div style="background-color: ' + competitors[x]['color'] + '" id="' + x + '" class="lane '+strClass+'"><span>' + competitors[x]['name'] + '</span></div>';
+                htmlSelectors += '<button style="background-color: ' + competitors[x]['color'] + '" name="' + x + '" class="btn-selector '+strClass+'">' + x + '<sup>c</sup></button>';
             }
         }
         elemLanesWrapper.innerHTML = htmlLanes;

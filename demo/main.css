@@ -96,6 +96,7 @@ em {
 
 .ground {
   border: 1px solid #000000;
+  min-height: 215px;
   position: relative;
   width: 400px;
 }
@@ -147,11 +148,9 @@ em {
 
 #lanes > div.active {
   border-color: #d8d800 !important;
-  color: #d8d800;
 }
 
 #lanes > div span {
-  color: #d80000;
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 4px;
@@ -160,7 +159,8 @@ em {
 }
 
 #lanes > div.active span {
-  color: #000000;
+  font-weight: 800;
+  font-size: 1.5em;
 }
 
 #selectors-wrapper button {
@@ -169,8 +169,6 @@ em {
   margin-bottom: 4px;
   min-width: 30px;
   padding: 4px 8px;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #d8d8d8;
 }
 
 #selectors-wrapper.disabled button {
@@ -182,8 +180,6 @@ em {
   background-color: #ffffff !important;
   border-color: #000000;
   color: #000000;
-  -webkit-text-stroke-width: 0;
-  -webkit-text-stroke-color: transparent;
 }
 
 #selectors-wrapper button.active {
@@ -202,4 +198,11 @@ em {
   top: 8px;
   font-size: 1em;
   z-index: 2;
+}
+
+.dark:not(:hover) {
+  color: #ffffff !important;
+}
+.dark span {
+  color: #ffffff;
 }
