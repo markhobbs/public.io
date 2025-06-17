@@ -147,6 +147,12 @@
     }
 
     function fn_race_reset_buttons() {
+        const boxes = document.querySelectorAll('.btn-selector');
+        boxes.forEach(box => {
+
+            box.classList.remove("active");
+        });
+        
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.remove("disabled");
@@ -201,6 +207,7 @@
                 current_pick.classList.add("active");
                 curValue = current_pick.getAttribute("id");
                 fn_race_ready_buttons();
+                this.classList.add("active");
                 betCount++;
             } else {
                 alert("Only 1 Bet Per Race! Select Reset to Choose Again.");
