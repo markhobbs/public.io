@@ -36,8 +36,8 @@
     var elemWallet = document.getElementById("wallet");
     var elemSelectors = document.getElementById("selectors-wrapper");
     var elemHistory = document.getElementById("history-wrapper");
-    var btnRaceReset = document.getElementById("btn-reset");
     var btnHistoryReset = document.getElementById("btn-reset-history");
+    var btnRaceReset = document.getElementById("btn-reset");
     var btnRaceStart = document.getElementById("btn-start");
 
     // Make sure all elements exist
@@ -179,6 +179,7 @@
             elemMessage.innerHTML = strMessageLoss;
             fn_wallet_ui(-val);
         }
+        btnRaceReset.removeAttribute("disabled");
     }
 
     function fn_race_lane() {
@@ -191,10 +192,10 @@
                 fn_race_ready_buttons();
                 betCount++;
             } else {
-                alert("Max 1 bet(s) exceeded! Select Reset to Choose Again.");
+                alert("Only 1 Bet Per Race! Select Reset to Choose Again.");
             }
         } else {
-            alert("No bets please! Race is in progress. Click Reset to reset the race.");
+            alert("No Bets! Reset Required.");
         }
     }
 
@@ -215,6 +216,7 @@
         intervalId = setInterval(fn_race_positions, 500);
         elemMessage.innerHTML = "Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
+        btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
     }
 
