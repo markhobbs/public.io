@@ -59,6 +59,32 @@
         2: { color: "#ffff00", name:"yellow" }, 
         1: { color: "#d8d8d8", name:"white" }
     };
+
+    // Storage Helper: Fallback for localStorage
+    var storageFallback = {};
+    var storage = {
+        getItem: function(key) {
+            try {
+                return window.localStorage.getItem(key);
+            } catch (e) {
+                return storageFallback[key] || null;
+            }
+        },
+        setItem: function(key, value) {
+            try {
+                window.localStorage.setItem(key, value);
+            } catch (e) {
+                storageFallback[key] = value;
+            }
+        },
+        removeItem: function(key) {
+            try {
+                window.localStorage.removeItem(key);
+            } catch (e) {
+                delete storageFallback[key];
+            }
+        }
+    };
     
     // Helper: Random delta for lane progress
     function fn_delta() {
@@ -70,14 +96,14 @@
 
     // Store race winner to localStorage and update UI
     function fn_history_store(val) {
-        var has_history = localStorage.getItem("history");
+        var has_history = storage.getItem("history");
         var historyBuilderString = "";
         if (has_history) {
-            historyBuilderString = localStorage.getItem("history") + "," + val;
+            historyBuilderString = storage.getItem("history") + "," + val;
         } else {
             historyBuilderString = val;
         }
-        localStorage.setItem("history", historyBuilderString);
+        storage.setItem("history", historyBuilderString);
         fn_history_ui();
     }
 
@@ -85,10 +111,10 @@
     function fn_history_ui() {
         var arrHistory;
         var count = {};
-        var hasHistory = localStorage.getItem("history");
+        var hasHistory = storage.getItem("history");
         if (hasHistory) {
             btnHistoryReset.removeAttribute("disabled");
-            arrHistory = JSON.parse("[" + localStorage.getItem("history") + "]");
+            arrHistory = storage.getItem("history");
             for (var i = 0; i < arrHistory.length; i++) {
                 var item = arrHistory[i];
                 count[item] = (count[item] || 0) + 1;
@@ -154,7 +180,7 @@
     function fn_history_reset() {
         var text = "Are You Sure? This Action Will Delete All Race History.";
         if (confirm(text)) {
-            localStorage.removeItem("history");
+            storage.removeItem("history");
             fn_history_ui();
         }
     }
@@ -167,7 +193,7 @@
             val +
             "</strong> Credits.</p>" +
             strMessageReset;
-        var strMessageLoss = "Sorry <strong class='upper'>" +
+        var strMessageLoss = "<strong class='upper'>" +
             name +
             "</strong> Won the Race! You Lose <strong>" + val +
             "</strong> Credits.</p>" +
