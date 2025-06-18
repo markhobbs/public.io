@@ -82,6 +82,8 @@ button {
   margin-right: 2px; 
   padding: 6px 12px;
   text-transform: uppercase;
+  animation-name: selectorsFlicker;
+  animation-duration: 0.3s;
 }
 
 button:not(:disabled):hover {
@@ -218,6 +220,17 @@ em {
 #selectors button.active {
   border-color: #d8d800 !important;
   border-width: 5px;
+}
+
+@keyframes selectorsFlicker {
+  0%   {background-color: #000000;}
+  12.5%  {background-color: #0000ff;}
+  25%  {background-color: #ff0000;}
+  37.5% {background-color: #d800d8;}
+  50%   {background-color: #00ff00;}
+  62.5%  {background-color: #00ffff;}
+  75%  {background-color: #ffff00;}
+  100% {background-color: #ffffff;}
 }
 
 #wallet {
