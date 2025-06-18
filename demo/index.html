@@ -7,7 +7,7 @@
 		<meta name="keywords" content="HTML, CSS, JavaScript">
 		<meta name="author" content="John Doe">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="main.css">
+		<link rel="stylesheet" href="main.css" media="all" async>
 	</head>
 	<body>
 		<div 
@@ -44,35 +44,36 @@
 				maxlength="4" 
 				size="4"><!--
 			--><label for="wallet">Credits</label>
-      			</div>
+      		</div>
 
-			<h2>Make Your Bet</h2>
-			<div id="selectors-wrapper">
+			<h2>Place Your Bet</h2>
+			<div id="selectors">
 				<!-- Selectors Empty -->
 			</div>
 			<br>
+			<button 
+				id="btn-start" 
+				disabled="disabled">
+				Race
+			</button>
 			<button 
 				id="btn-reset" 
 				disabled="disabled">
 				Reset
 			</button>
-			<!--
-			--><button 
-				id="btn-start" 
-				disabled="disabled">
-				Race
-			</button>
-			<p id="race-message"></p>
-			<h2>The Form</h2>
-			<p id="history-wrapper"></p>
+
+			<p id="message"></p>
+
+			<h2>Form Card</h2>
+			<p id="history"></p>
 			<div id="elem-graph"></div>
 			<button 
 				class="btn-warning" 
 				id="btn-reset-history" 
 				disabled="disabled">
-				Delete Form Data  
+				Bin Form Card 
 			</button>
 		</div>
-    		<script src="main.js"></script>
+    	<script src="main.js"></script>
 	</body>
 </html>
