@@ -1,5 +1,5 @@
 // main.js
-// Simple JS Racing Game (ES5)
+// Simple JS Racing Game
 
 (function() {
     // State variables
@@ -7,25 +7,27 @@
     var betMax = 1;
     var credits = 5000;
     var curValue = 0;
-    var laneTrackPosition = 0;
-    var laneTrackLengthMax = 400;
+    var laneStartPosition = 2;
+    var laneMaxLength = 300;
     var intervalIdAutoReset = null;
     var intervalIdRace = null;
     var isRunning = false;
+    var timeAutoReset = 5; //secs
 
     // DOM Elements
     var elemContainer = document.getElementById("container-app-1");
-    var elemLanesWrapper = document.getElementById("lanes");
-    var elemMessage = document.getElementById("race-message");
+    var elemHistory = document.getElementById("history");
+    var elemLanes = document.getElementById("lanes");
+    var elemMessage = document.getElementById("message");
+    var elemSelectors = document.getElementById("selectors");
+    var elemTrack =  elemContainer.getElementsByClassName("track");
     var elemWallet = document.getElementById("wallet");
-    var elemSelectors = document.getElementById("selectors-wrapper");
-    var elemHistory = document.getElementById("history-wrapper");
     var btnHistoryReset = document.getElementById("btn-reset-history");
     var btnRaceReset = document.getElementById("btn-reset");
     var btnRaceStart = document.getElementById("btn-start");
 
     // Make sure all elements exist
-    if (!elemContainer || !elemLanesWrapper || !elemMessage || !elemWallet || !elemSelectors || !elemHistory || !btnRaceReset || !btnHistoryReset || !btnRaceStart) {
+    if (!elemContainer || !elemLanes || !elemMessage || !elemWallet || !elemSelectors || !elemHistory || !btnRaceReset || !btnHistoryReset || !btnRaceStart) {
         alert("Some UI elements are missing. Game cannot load.");
         return;
     }
@@ -126,9 +128,9 @@
         var elemLanes = elemContainer.querySelectorAll(".lane");
         for (var i = 0; i < elemLanes.length; i++) {
             var curWidth = elemLanes[i].clientWidth;
-            var newLaneTrackPosition = parseInt(curWidth + (laneTrackPosition * fn_delta()), 10);
-            if (curWidth < laneTrackLengthMax) {
-                elemLanes[i].style.width = newLaneTrackPosition + "px";
+            var newlaneStartPosition = parseInt(curWidth + (laneStartPosition * fn_delta()), 10);
+            if (curWidth < laneMaxLength) {
+                elemLanes[i].style.width = newlaneStartPosition + "px";
             } else {
                 var curName = elemLanes[i].getElementsByTagName('span')[0].innerHTML;
                 var winnerId = elemLanes[i].getAttribute("id");
@@ -138,7 +140,7 @@
                 break;
             }
         }
-        laneTrackPosition++;
+        laneStartPosition++;
     }
 
     function fn_race_ready_buttons() {
@@ -147,12 +149,10 @@
     }
 
     function fn_race_reset_buttons() {
-        const boxes = document.querySelectorAll('.btn-selector');
-        boxes.forEach(box => {
-
-            box.classList.remove("active");
-        });
-        
+        var buttons = elemContainer.querySelectorAll(".btn-selector");
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove(["active"],["winner"],["loser"]);
+        }
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.remove("disabled");
@@ -162,7 +162,7 @@
         var elemLanes = elemContainer.querySelectorAll(".lane");
         betCount = 0;
         for (var i = 0; i < elemLanes.length; i++) {
-            elemLanes[i].style.width = 0;
+            elemLanes[i].style.width = 2 + "px" ;
             elemLanes[i].classList.remove("active");
         }
     }
@@ -176,7 +176,7 @@
     }
 
     function fn_message(winId, val, name) {
-        var strMessageReset = "<p>Race Will Reset Automatically in 10 Seconds.</p>";
+        var strMessageReset = "<p>Reseting Race in " + timeAutoReset + " seconds.</p>";
         var strMessageWin = "Hooray <strong class='upper'>" +
             name +
             "</strong> is the Winner! You Won <strong>" +
@@ -195,8 +195,9 @@
             elemMessage.innerHTML = strMessageLoss;
             fn_wallet_ui(-val);
         }
+        fn_selector_highlight_winner(winId);
         btnRaceReset.removeAttribute("disabled");
-        intervalIdAutoReset = setInterval(fn_race_reset, 10000);
+        intervalIdAutoReset = setInterval(fn_race_reset, timeAutoReset * 1000);
     }
 
     function fn_race_lane() {
@@ -220,6 +221,7 @@
     function fn_race_reset() {
         clearInterval(intervalIdRace);
         clearInterval(intervalIdAutoReset);
+        elemMessage.innerHTML = "";
         var value = parseInt(elemWallet.value, 10);
         if (value > 0) {
             isRunning = false;
@@ -232,6 +234,7 @@
 
     function fn_race_start() {
         isRunning = true;
+        laneMaxLength = elemTrack[0].clientWidth;
         intervalIdRace = setInterval(fn_race_positions, 500);
         elemMessage.innerHTML = "No Bets Please! Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
@@ -253,8 +256,19 @@
                 htmlSelectors += '<button style="background-color: ' + competitors[x]['color'] + '" name="' + x + '" class="btn-selector '+strClass+'">' + x + '<sup>c</sup></button>';
             }
         }
-        elemLanesWrapper.innerHTML = htmlLanes;
+        elemLanes.innerHTML = htmlLanes;
         elemSelectors.innerHTML = htmlSelectors;
+    }
+
+    function fn_selector_highlight_winner(val) {
+        var buttons = elemContainer.querySelectorAll(".btn-selector");
+        for (var i = 0; i < buttons.length; i++) {
+            if (buttons[i].name == val) {
+                buttons[i].classList.add("winner");
+            }  else {
+                buttons[i].classList.add("loser");
+            }
+        }
     }
 
     function fn_update_ui() {
@@ -280,3 +294,10 @@
         } 
     };
 })();
+
+/*
+    TODO : INCREASE PROBABILITY OF LOWER STAKED COMPETITORS WINNING.
+    TODO : HEDGE BETS ALLOW FOR 2 BETS PER RACE.
+    TODO : FALLBACK LOCAL STORAGE.
+*/
+
