@@ -37,8 +37,8 @@
     var competitors = [
         { id: 200, color: "#000000", dark: true, name: "black" },
         { id: 100, color: "#0000ff", dark: true, name: "blue" },
-        { id: 50, color: "#ff0000", dark: true, name: "red" },
-        { id: 20, color: "#ff00ff", dark: true, name: "magenta" },
+        { id: 50, color: "#ff0000", dark: false, name: "red" },
+        { id: 20, color: "#ff00ff", dark: false, name: "magenta" },
         { id: 10, color: "#00ff00", dark: false, name: "green" },
         { id: 5, color: "#00ffff", dark: false, name: "cyan" },
         { id: 2, color: "#ffff00", dark: false, name: "yellow" },
