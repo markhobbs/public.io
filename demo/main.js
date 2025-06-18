@@ -176,7 +176,7 @@
     }
 
     function fn_message(winId, val, name) {
-        var strMessageReset = "<p>Reseting Race in " + timeAutoReset + " seconds.</p>";
+        var strMessageReset = "<p>Resetting Race in " + timeAutoReset + " seconds.</p>";
         var strMessageWin = "Hooray <strong class='upper'>" +
             name +
             "</strong> is the Winner! You Won <strong>" +
