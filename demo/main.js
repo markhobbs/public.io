@@ -7,11 +7,14 @@
     var betMax = 1;
     var credits = 5000;
     var curValue = 0;
+    var fairyLightsTimeout = null
+    var hasFairyLights = true;
     var laneStartPosition = 2;
     var laneMaxLength = 300;
     var autoResetTimeout = null;
     var isRunning = false;
     var timeAutoReset = 5; // seconds
+    var timeFairyLight = 0.5 // seconds
     var cachedLanes = [];
     var cachedSelectors = [];
 
@@ -78,6 +81,10 @@
         return arrDelta[random];
     }
 
+    function fn_get_random_int(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     // Store race winner to localStorage and update UI
     function fn_history_store(val) {
         var hasHistory = storage.getItem("history");
@@ -137,6 +144,13 @@
         laneStartPositionDup++;
         if (winnerIndex > -1) {
             // Race finished
+            if (hasFairyLights) {
+                for (var i = 0; i < cachedSelectors.length; i++) {
+                    cachedSelectors[i].classList.remove("winner", "loser");
+                    cachedSelectors[i].disabled = false;
+                }
+                clearTimeout(fairyLightsTimeout);
+            }
             var winnerLane = cachedLanes[winnerIndex];
             var curName = winnerLane.getElementsByTagName('span')[0].innerHTML;
             var winnerId = winnerLane.getAttribute("id");
@@ -149,13 +163,15 @@
     }
 
     function fn_race_ready_buttons() {
-        elemSelectors.classList.add("disabled");
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].disabled = true;
+        }
         btnRaceStart.removeAttribute("disabled");
     }
-
     function fn_race_reset_buttons() {
         for (var i = 0; i < cachedSelectors.length; i++) {
             cachedSelectors[i].classList.remove("active", "winner", "loser");
+            cachedSelectors[i].disabled = false;
         }
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
@@ -226,6 +242,7 @@
     function fn_race_reset() {
         isRunning = false;
         if (autoResetTimeout) clearTimeout(autoResetTimeout);
+        if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
         elemMessage.innerHTML = "";
         var value = parseInt(elemWallet.value, 10);
         if (value > 0) {
@@ -245,6 +262,35 @@
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
+        if (hasFairyLights) {
+            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, timeFairyLight * 1000);
+        }
+    }
+
+    function fn_fairy_lights_alt1() {
+        if (cachedSelectors.length < 2) return;
+        var rand1 = fn_get_random_int(cachedSelectors.length);
+        var rand2;
+        do {
+            rand2 = fn_get_random_int(cachedSelectors.length);
+        } while (rand2 === rand1);
+
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].classList.remove("winner", "loser");
+        }
+        cachedSelectors[rand1].classList.add("loser");
+        cachedSelectors[rand2].classList.add("winner");
+    }
+
+    function fn_fairy_lights_alt2() {
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].classList.remove("winner", "loser");
+            if (Math.random() < 0.5) {
+                cachedSelectors[i].classList.add("winner");
+            } else {
+                cachedSelectors[i].classList.add("loser");
+            }
+        }
     }
 
     function fn_race_ui() {
