@@ -261,17 +261,34 @@
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
         if (hasFairyLights) {
-            fairyLightsTimeout = setInterval(fn_fairy_lights, fairyLightTimeout);
+            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, fairyLightTimeout);
         }
     }
 
-    function fn_fairy_lights() {
+    function fn_fairy_lights_alt1() {
+        if (cachedSelectors.length < 2) return;
         var rand1 = fn_get_random_int(cachedSelectors.length);
-        var rand2 = fn_get_random_int(cachedSelectors.length);
+        var rand2;
+        do {
+            rand2 = fn_get_random_int(cachedSelectors.length);
+        } while (rand2 === rand1);
+
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].classList.remove("winner", "loser");
+        }
         cachedSelectors[rand1].classList.add("loser");
-        cachedSelectors[rand1].classList.remove("winner")
         cachedSelectors[rand2].classList.add("winner");
-        cachedSelectors[rand2].classList.remove("loser")
+    }
+
+    function fn_fairy_lights_alt2() {
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].classList.remove("winner", "loser");
+            if (Math.random() < 0.5) {
+                cachedSelectors[i].classList.add("winner");
+            } else {
+                cachedSelectors[i].classList.add("loser");
+            }
+        }
     }
 
     function fn_race_ui() {
