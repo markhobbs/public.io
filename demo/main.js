@@ -126,14 +126,15 @@
         for (var i = 0; i < cachedLanes.length; i++) {
             var lane = cachedLanes[i];
             var curWidth = lane.offsetWidth;
-            var newlaneStartPosition = Math.floor(curWidth + (laneStartPosition * fn_delta()));
+            var laneStartPositionDup = laneStartPosition;
+            var newlaneStartPosition = Math.floor(curWidth + (laneStartPositionDup * fn_delta()));
             if (curWidth < laneMaxLength) {
                 lane.style.width = newlaneStartPosition + "px";
             } else if (winnerIndex === -1) {
                 winnerIndex = i;
             }
         }
-        laneStartPosition++;
+        laneStartPositionDup++;
         if (winnerIndex > -1) {
             // Race finished
             var winnerLane = cachedLanes[winnerIndex];
@@ -237,7 +238,6 @@
 
     function fn_race_start() {
         isRunning = true;
-        laneStartPosition = 2;
         laneMaxLength = elemTrack[0].clientWidth;
         cachedLanes = elemContainer.querySelectorAll(".lane");
         window.requestAnimationFrame(fn_race_positions);
