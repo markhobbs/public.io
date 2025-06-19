@@ -246,8 +246,8 @@ em {
 }
 
 .dark,
-#selectors.disabled button.dark,
-#selectors.disabled button.dark:hover,
+#selectors button:disabled.dark,
+#selectors button:disabled.dark:hover,
 .dark span {
   color: #ffffff;
 }
