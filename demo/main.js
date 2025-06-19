@@ -176,7 +176,6 @@
         }
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
-        elemSelectors.classList.remove("disabled");
     }
 
     function fn_race_reset_lanes() {
@@ -262,7 +261,6 @@
         elemMessage.innerHTML = "No Bets Please! Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
-        elemSelectors.classList.add("disabled");
         if (hasFairyLights) {
             fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
         }
@@ -272,9 +270,7 @@
         if (cachedSelectors.length < 2) return;
         var rand1 = fn_get_random_int(cachedSelectors.length);
         var rand2;
-        do {
-            rand2 = fn_get_random_int(cachedSelectors.length);
-        } while (rand2 === rand1);
+        do {rand2 = fn_get_random_int(cachedSelectors.length)} while (rand2 === rand1);
 
         for (var i = 0; i < cachedSelectors.length; i++) {
             cachedSelectors[i].classList.remove("winner", "loser");
