@@ -7,6 +7,8 @@
     var betMax = 1;
     var credits = 5000;
     var curValue = 0;
+    var fairyLightTimeout = 600;
+    var hasFairyLights = true;
     var laneStartPosition = 2;
     var laneMaxLength = 300;
     var autoResetTimeout = null;
@@ -78,6 +80,10 @@
         return arrDelta[random];
     }
 
+    function fn_get_random_int(max) {
+        return Math.floor(Math.random() * max);
+    }
+
     // Store race winner to localStorage and update UI
     function fn_history_store(val) {
         var hasHistory = storage.getItem("history");
@@ -137,6 +143,13 @@
         laneStartPositionDup++;
         if (winnerIndex > -1) {
             // Race finished
+            if (hasFairyLights) {
+                for (var i = 0; i < cachedSelectors.length; i++) {
+                    cachedSelectors[i].classList.remove("winner", "loser");
+                    cachedSelectors[i].disabled = false;
+                }
+                clearTimeout(fairyLightsTimeout);
+            }
             var winnerLane = cachedLanes[winnerIndex];
             var curName = winnerLane.getElementsByTagName('span')[0].innerHTML;
             var winnerId = winnerLane.getAttribute("id");
@@ -149,13 +162,15 @@
     }
 
     function fn_race_ready_buttons() {
-        elemSelectors.classList.add("disabled");
+        for (var i = 0; i < cachedSelectors.length; i++) {
+            cachedSelectors[i].disabled = true;
+        }
         btnRaceStart.removeAttribute("disabled");
     }
-
     function fn_race_reset_buttons() {
         for (var i = 0; i < cachedSelectors.length; i++) {
             cachedSelectors[i].classList.remove("active", "winner", "loser");
+            cachedSelectors[i].disabled = false;
         }
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
@@ -245,6 +260,18 @@
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
+        if (hasFairyLights) {
+            fairyLightsTimeout = setInterval(fn_fairy_lights, fairyLightTimeout);
+        }
+    }
+
+    function fn_fairy_lights() {
+        var rand1 = fn_get_random_int(cachedSelectors.length);
+        var rand2 = fn_get_random_int(cachedSelectors.length);
+        cachedSelectors[rand1].classList.add("loser");
+        cachedSelectors[rand1].classList.remove("winner")
+        cachedSelectors[rand2].classList.add("winner");
+        cachedSelectors[rand2].classList.remove("loser")
     }
 
     function fn_race_ui() {

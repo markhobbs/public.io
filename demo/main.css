@@ -195,12 +195,7 @@ em {
   min-width: 72px;
 }
 
-#selectors.disabled button {
-  cursor: default;
-  opacity: 50%;
-}
-
-#selectors button.loser {
+#selectors button:not(.winner).loser {
   background-color: white !important;
   color: black  !important;
 }
@@ -209,18 +204,18 @@ em {
   background-color: inherit;
 }
 
-#selectors:not(.disabled) button.dark:not(:hover) {
-  color: #ffffff !important;
+#selectors button.dark {
+  color: #ffffff;
 }
 
-#selectors:not(.disabled) button:hover {
+#selectors button:not(:disabled):hover {
   background-color: #ffffff !important;
   border-color: #000000;
   color: #000000;
 }
 
 #selectors button.active {
-  border-color: #d8d800 !important;
+  border-color: #d8d800;
   border-width: 3px;
 }
 
