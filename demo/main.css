@@ -4,10 +4,17 @@ body {
   font-family: "Lucida Console", "Courier New", monospace;
 }
 
+
+
 @media only screen and (max-width: 600px) {
   h1 {
     font-size:1em;
   }
+}
+
+h1 span{
+  animation-name: selectorsFlicker;
+  animation-duration: 0.3s;
 }
 
 h1 span {
