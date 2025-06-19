@@ -14,7 +14,7 @@
     var autoResetTimeout = null;
     var isRunning = false;
     var timeAutoReset = 5; // seconds
-    var timeFairyLight = 0.5 // seconds
+    var timeFairyLight = 0.1 // seconds
     var cachedLanes = [];
     var cachedSelectors = [];
 
@@ -263,7 +263,7 @@
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
         if (hasFairyLights) {
-            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, timeFairyLight * 1000);
+            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
         }
     }
 
