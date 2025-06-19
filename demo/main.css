@@ -13,6 +13,8 @@ body {
 h1 span {
   border-color: #000000;
   padding: 0 2px;
+  animation-name: selectorsFlicker;
+  animation-duration: 0.3s;
 }
 
 h1 span:nth-child(1) {
