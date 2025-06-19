@@ -14,7 +14,7 @@
     var autoResetTimeout = null;
     var isRunning = false;
     var timeAutoReset = 5; // seconds
-    var timeFairyLight = 0.1 // seconds
+    var timeFairyLight = 0.3 // seconds
     var cachedLanes = [];
     var cachedSelectors = [];
 
@@ -157,6 +157,7 @@
             isRunning = false;
             fn_message(winnerId, curValue, curName);
             fn_history_store(winnerId);
+            btnRaceReset.focus();
         } else {
             window.requestAnimationFrame(fn_race_positions);
         }
