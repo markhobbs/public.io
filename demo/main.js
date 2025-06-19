@@ -7,13 +7,14 @@
     var betMax = 1;
     var credits = 5000;
     var curValue = 0;
-    var fairyLightTimeout = 600;
+    var fairyLightsTimeout = null
     var hasFairyLights = true;
     var laneStartPosition = 2;
     var laneMaxLength = 300;
     var autoResetTimeout = null;
     var isRunning = false;
     var timeAutoReset = 5; // seconds
+    var timeFairyLight = 0.5 // seconds
     var cachedLanes = [];
     var cachedSelectors = [];
 
@@ -241,6 +242,7 @@
     function fn_race_reset() {
         isRunning = false;
         if (autoResetTimeout) clearTimeout(autoResetTimeout);
+        if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
         elemMessage.innerHTML = "";
         var value = parseInt(elemWallet.value, 10);
         if (value > 0) {
@@ -261,7 +263,7 @@
         btnRaceReset.setAttribute("disabled", "disabled");
         elemSelectors.classList.add("disabled");
         if (hasFairyLights) {
-            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, fairyLightTimeout);
+            fairyLightsTimeout = setInterval(fn_fairy_lights_alt1, timeFairyLight * 1000);
         }
     }
 
