@@ -35,13 +35,13 @@
     // Competitors Array
     var competitors = [
         { color: "#000000", dark: true, id: 200, name: "black" },
-        { color: "#0000ff", dark: true, id: 100, name: "blue" },
-        { color: "#ff0000", dark: false, id: 50, name: "red" },
-        { color: "#ff00ff", dark: false, id: 20, name: "magenta" },
-        { color: "#00ff00", dark: false, id: 10, name: "green" },
-        { color: "#00ffff", dark: false, id: 5, name: "cyan" },
-        { color: "#ffff00", dark: false, id: 2, name: "yellow" },
-        { color: "#d8d8d8", dark: false, id: 1, name: "white" }
+        { color: "#0200fd", dark: true, id: 100, name: "blue" },
+        { color: "#ff0201", dark: false, id: 50, name: "red" },
+        { color: "#ff02fd", dark: false, id: 20, name: "magenta" },
+        { color: "#00ff1c", dark: false, id: 10, name: "green" },
+        { color: "#02ffff", dark: false, id: 5, name: "cyan" },
+        { color: "#ffff1d", dark: false, id: 2, name: "yellow" },
+        { color: "#cfcfcf", dark: false, id: 1, name: "white" }
     ];
 
     // Storage Helper: Fallback for localStorage
