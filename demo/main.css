@@ -2,19 +2,28 @@
 
 body {
   font-family: "Lucida Console", "Courier New", monospace;
-}
-
-@media only screen and (max-width: 600px) {
-  h1 {
-    font-size:1em;
-  }
+  /*
+    background-image: radial-gradient(circle at center, #d8d8d8 1px, transparent 1px);
+    background-size: 5px 5px;
+    background-color: #ffffff;
+  */
+  background-image: repeating-linear-gradient(45deg, #d8d8d8 0, #d8d8d8 1px, transparent 0, transparent 50%);
+  background-size: 9px 9px;
+  background-color: #ffffff;
 }
 
 h1 span {
+  font-size: 1.6em;
   border-color: #000000;
   padding: 0 2px;
   animation-name: selectorsFlicker;
   animation-duration: 0.3s;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 span {
+    font-size: 0.7em;
+  }
 }
 
 h1 span:nth-child(1) {
@@ -96,7 +105,15 @@ button:not(:disabled):hover {
 
 button:disabled {
   cursor: default;
-  opacity: 50%;
+  opacity: 80%;
+}
+
+button.warning {
+  background-color: #d80000;
+}
+
+button.warm {
+  background-color: #00d800;
 }
 
 em {
