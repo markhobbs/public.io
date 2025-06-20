@@ -256,7 +256,7 @@
             this.classList.add("active");
             betCount++;
         } else {
-            alert("Only 1 Bet Per Race! Select Reset to Choose Again.");
+            alert("Change Bet!  " + betMax + " Bet Max.");
         }
     }
 
