@@ -139,15 +139,6 @@ em {
 }
 
 .track {
-  /*background: url("./grass.webp") repeat;*/
-  background-color: #00d800;
-  background-image:
-      linear-gradient(45deg, #00d800 26%, transparent 26%), 
-      linear-gradient(135deg, #00ff00 26%, transparent 26%),
-      linear-gradient(45deg, transparent 75%, #d8d800 75%),
-      linear-gradient(135deg, transparent 75%, #00d800 75%);
-  background-size: 20px 20px; /* Must be a square */
-  background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
   position: relative;
 }
 
@@ -171,9 +162,27 @@ em {
 }
 
 #lanes {
+   /*background: url("./grass.webp") repeat;*/
+  background-color: #00d800;
+  background-image:
+      linear-gradient(45deg, #00d800 26%, transparent 26%), 
+      linear-gradient(135deg, #00ff00 26%, transparent 26%),
+      linear-gradient(45deg, transparent 75%, #d8d800 75%),
+      linear-gradient(135deg, transparent 75%, #00d800 75%);
+  background-size: 20px 20px; /* Must be a square */
+  background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
   border-left: 5px solid #d8d800;
   border-right: 5px solid #d8d800;
   overflow: hidden;
+}
+
+#lanes.race-progress {
+  animation: Move 30s ease infinite;
+}
+
+@keyframes Move {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
 }
 
 #lanes > div {

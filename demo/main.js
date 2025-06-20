@@ -262,6 +262,7 @@
 
     function fn_race_reset() {
         isRunning = false;
+        elemLanes.classList.remove("race-progress");
         if (autoResetTimeout) clearTimeout(autoResetTimeout);
         if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
         elemMessage.innerHTML = "";
@@ -279,6 +280,7 @@
         laneMaxLength = elemTrack[0].clientWidth;
         cachedLanes = elemContainer.querySelectorAll(".lane");
         window.requestAnimationFrame(fn_race_positions);
+        elemLanes.classList.add("race-progress");
         elemMessage.innerHTML = "No Bets Please! Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
