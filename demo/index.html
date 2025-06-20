@@ -1,65 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Spectrum Derby :: Choose Your Lane</title>
-		<meta charset="UTF-8">
-		<meta name="description" content="Simple JavaScript Racing Game">
-		<meta name="keywords" content="HTML, CSS, JavaScript">
-		<meta name="author" content="Mark Hobbs">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="main.min.css" media="all" async>
-	</head>
-	<body>
-		<div 
-			id="container-app-1" 
-			class="container">
-			<h1>
-				<span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><span>m</span><span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
-			</h1>
-			<div class="ground">
-				<div class="track">
-					<div id="lanes"><!-- Empty --></div>
-				</div><input
-					aria-disabled="true"
-					id="wallet" 
-					name="wallet"
-					type="text"
-					disabled="disabled" 
-					maxlength="4" 
-					size="4"><label for="wallet">Credits</label>
-      		</div>
-
-			<h2>Place Your Bet</h2>
-			<div 
-				id="selectors"><!-- Empty --></div>
-			<br>
-			<button 
-				aria-disabled="true"
-				disabled="disabled"
-				id="btn-start">
-				Race
-			</button><button
-				aria-disabled="true"
-				disabled="disabled" 
-				id="btn-reset">
-				Reset
-			</button>
-
-			<p 
-				role="status"
-				id="message">
-			</p>
-
-			<h2>Form Card</h2>
-			<p 
-				role="status"
-				id="history"
-				></p>
-			<button
-				id="btn-reset-history">
-				Bin Form Card 
-			</button>
-		</div>
-    	<script src="main.js"></script>
-	</body>
+<head>
+    <title>Spectrum Derby :: Place Your Bet</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Simple JavaScript Racing Game">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Mark Hobbs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.min.css" media="all">
+</head>
+<body>
+    <div id="container-app-1">
+        <h1>
+            <span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><span>m</span>
+            <span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
+        </h1>
+        <div class="ground">
+            <div class="track">
+                <div id="lanes"><!-- Empty --></div>
+            </div>
+            <input id="wallet" name="wallet" type="text" disabled="disabled" maxlength="4" size="4">
+            <label for="wallet">Credits</label>
+        </div>
+        <h2>Place Your Bet</h2>
+        <div id="selectors"><!-- Empty --></div>
+        <button id="btn-start">Race</button><button id="btn-reset">Reset</button>
+        <p id="message" role="status" ></p>
+        <h2>Form Card</h2>
+        <p id="history" role="status"></p>
+        <button id="btn-reset-history">Bin Form Card</button>
+    </div>
+    <script src="main.js"></script>
+</body>
 </html>
