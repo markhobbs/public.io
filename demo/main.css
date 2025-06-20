@@ -12,6 +12,10 @@ body {
   background-color: #ffffff;
 }
 
+h1 {
+  word-wrap: break-word;
+}
+
 h1 span {
   font-size: 1.6em;
   border-color: #000000;
