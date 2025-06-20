@@ -30,51 +30,52 @@ h1 span:nth-child(1) {
   color: #ffffff;
 }
 h1 span:nth-child(2) {
-  background-color: #0000d8;
+  /*background-color: #0100ce;*/
+  background-color: #0100ce;
   color: #ffffff;
 }
 h1 span:nth-child(3) {
-  background-color: #0000ff;
+  background-color: #0200fd;
   color: #ffffff;
 }
 h1 span:nth-child(4) {
-  background-color: #d80000;
+  background-color: #cf0100;
   color: #ffffff;
 }
 h1 span:nth-child(5) {
-  background-color: #ff0000;
+  background-color: #ff0201;
   color: #ffffff;
 }
 h1 span:nth-child(6) {
-  background-color: #d800d8;
+  background-color: #cf01ce;
   color: #ffffff;
 }
 h1 span:nth-child(7) {
-  background-color: #ff00ff;
+  background-color: #ff02fd;
   color: #ffffff;
 }
 h1 span:nth-child(8) {
-  background-color: #00d800;
+  background-color: #00cf15;
   color: #ffffff;
 }
 h1 span:nth-child(9) {
-  background-color: #00ff00;
+  background-color: #00ff1c;
 
 }
 h1 span:nth-child(10) {
-  background-color: #00d8d8;
+  background-color: #01cfcf;
 }
 h1 span:nth-child(11) {
-  background-color: #00ffff;
+  background-color: #02ffff;
 }
 h1 span:nth-child(12) {
-  background-color: #d8d800;
+  background-color: #cfcf15;
 }
 h1 span:nth-child(13) {
-  background-color: #ffff00;
+  background-color: #ffff1d;
 }
 h1 span:nth-child(14) {
-  background-color: #d8d8d8;
+  background-color: #cfcfcf;
 }
 
 h2 {
@@ -108,11 +109,11 @@ button:disabled {
 }
 
 button.warning {
-  background-color: #d80000;
+  background-color: #cf0100;
 }
 
 button.warm {
-  background-color: #00d800;
+  background-color: #00cf15;
 }
 
 em {
@@ -163,12 +164,12 @@ em {
 
 #lanes {
    /*background: url("./grass.webp") repeat;*/
-  background-color: #00d800;
+  background-color: #00cf15;
   background-image:
-      linear-gradient(45deg, #00d800 26%, transparent 26%), 
-      linear-gradient(135deg, #00ff00 26%, transparent 26%),
+      linear-gradient(45deg, #00cf15 26%, transparent 26%), 
+      linear-gradient(135deg, #00ff1c 26%, transparent 26%),
       linear-gradient(45deg, transparent 75%, #d8d800 75%),
-      linear-gradient(135deg, transparent 75%, #00d800 75%);
+      linear-gradient(135deg, transparent 75%, #00cf15 75%);
   background-size: 20px 20px; /* Must be a square */
   background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
   border-left: 5px solid #d8d800;
@@ -247,11 +248,11 @@ em {
 
 @keyframes selectorsFlicker {
   0%   {background-color: #000000;}
-  12.5%  {background-color: #0000ff;}
-  25%  {background-color: #ff0000;}
-  37.5% {background-color: #d800d8;}
-  50%   {background-color: #00ff00;}
-  62.5%  {background-color: #00ffff;}
+  12.5%  {background-color: #0200fd;}
+  25%  {background-color: #ff0201;}
+  37.5% {background-color: #cf01ce;}
+  50%   {background-color: #00ff1c;}
+  62.5%  {background-color: #02ffff;}
   75%  {background-color: #ffff00;}
   100% {background-color: #ffffff;}
 }
