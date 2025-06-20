@@ -5,6 +5,7 @@
     // State variables
     var betCount = 0;
     var betMax = 1;
+    var bolShowSpriteAlt = true;
     var credits = 5000;
     var curValue = 0;
     var fairyLightsTimeout = null;
@@ -12,6 +13,7 @@
     var laneStartPosition = 2;
     var laneMaxLength = 300;
     var autoResetTimeout = null;
+    var horseAnimTimeout = null;
     var isRunning = false;
     var timeAutoReset = 5; // seconds
     var timeFairyLight = 0.3; // seconds
@@ -265,6 +267,7 @@
         elemLanes.classList.remove("race-progress");
         if (autoResetTimeout) clearTimeout(autoResetTimeout);
         if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
+        if (horseAnimTimeout) clearTimeout(horseAnimTimeout);
         elemMessage.innerHTML = "";
         var value = parseInt(elemWallet.value, 10);
         if (value > 0) {
@@ -284,9 +287,20 @@
         elemMessage.innerHTML = "No Bets Please! Race in Progress.";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
+        horseAnimTimeout = setInterval(fn_sprite_anim, 300);
         if (hasFairyLights) {
             fairyLightsTimeout = setInterval(
                 fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
+        }
+    }
+
+    function fn_sprite_anim() {
+        if (bolShowSpriteAlt === true) {
+            bolShowSpriteAlt = false;
+            elemLanes.classList.add("race-sprite-alt");
+        } else {
+            bolShowSpriteAlt = true;
+            elemLanes.classList.remove("race-sprite-alt");
         }
     }
 
@@ -311,7 +325,7 @@
         }
     }
 
-    function fn_fairy_lights_alt2() {
+    /*function fn_fairy_lights_alt2() {
         for (var i = 0; i < cachedSelectors.length; i++) {
             if (cachedSelectors[i].classList.contains("loser")) {
                 cachedSelectors[i].classList.remove("loser");
@@ -325,7 +339,7 @@
                 cachedSelectors[i].classList.add("loser");
             }
         }
-    }
+    }*/
 
     function fn_race_ui() {
         var htmlLanes = "", htmlSelectors = "";
