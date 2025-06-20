@@ -2,11 +2,6 @@
 
 body {
   font-family: "Lucida Console", "Courier New", monospace;
-  /*
-    background-image: radial-gradient(circle at center, #d8d8d8 1px, transparent 1px);
-    background-size: 5px 5px;
-    background-color: #ffffff;
-  */
   background-image: repeating-linear-gradient(45deg, #d8d8d8 0, #d8d8d8 1px, transparent 0, transparent 50%);
   background-size: 9px 9px;
   background-color: #ffffff;
@@ -131,6 +126,8 @@ em {
 
 .ground {
   background-color: #d8d800;
+  background-image: radial-gradient(circle at center, #d8d8d8 1px, transparent 1px);
+  background-size: 5px 5px;
   border: 1px solid #000000;
   min-height: 215px;
   min-width: 300px;
