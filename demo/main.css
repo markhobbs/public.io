@@ -101,7 +101,7 @@ button:not(:disabled):hover {
 }
 button:disabled {
   cursor: default;
-  background-color: transparent;
+  background-color: #ffffff;
   color: #000000;
 }
 button:not(:disabled).warning {

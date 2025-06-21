@@ -1,7 +1,7 @@
 // main.js
 // Simple JS Racing Game
-
 (function () {
+    "use strict";
     // State variables
     var betCount = 0;
     var betMax = 1;
@@ -31,8 +31,8 @@
     var btnHistoryReset = document.getElementById("btn-reset-history");
     var btnRaceReset = document.getElementById("btn-reset");
     var btnRaceStart = document.getElementById("btn-start");
-    var elemTrack =
-        elemContainer ? elemContainer.getElementsByClassName("track"): [];
+    var elemTrack = (
+        elemContainer ? elemContainer.getElementsByClassName("track"): []);
 
     // Competitors Array
     var competitors = [
@@ -93,7 +93,8 @@
     // Store race winner to localStorage and update UI
     function fn_history_store(val) {
         var hasHistory = storage.getItem("history");
-        var historyBuilderString = hasHistory ? hasHistory + "," + val : val;
+        var historyBuilderString =
+            (hasHistory ? hasHistory + "," + val : val);
         storage.setItem("history", historyBuilderString);
         fn_history_ui();
     }
