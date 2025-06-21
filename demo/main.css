@@ -219,10 +219,10 @@ em {
   top: 0;
 }
 #lanes > div:after {
-  content: url("./horse-f1.webp");
+  content: url("./horse-f1.gif");
 }
 #lanes.race-sprite-alt > div:after {
-  content: url("./horse-f2.webp");
+  content: url("./horse-f2.gif");
 }
 
 #message {
