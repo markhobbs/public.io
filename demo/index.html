@@ -19,16 +19,21 @@
             <div class="track">
                 <div id="lanes"><!-- Empty --></div>
             </div>
-            <input id="wallet" name="wallet" type="text" disabled="disabled" maxlength="5" size="5">
-            <label for="wallet">Credits</label>
+            <div>
+                <label for="bank">Bank</label>
+                <br />
+                <input id="bank" name="bank" type="text" disabled="disabled" maxlength="5" size="5">
+            </div>
+            <p id="message" role="status"></p>
+            <p><em>*1<sup>c/race</sup></em></p>
         </div>
+        
         <h2>Place Your Bet</h2>
         <div id="selectors"><!-- Empty --></div>
         <p>
             <button id="btn-reset">Change Bet</button>
             <button id="btn-start" class="warm">Race</button>
         </p>
-        <p id="message" role="status" ></p>
         <h2>Form Card</h2>
         <p id="history" role="status"></p>
         <button id="btn-reset-history" class="warning">Delete Form Card</button>

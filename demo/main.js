@@ -22,12 +22,12 @@
     var cachedSelectors = [];
 
     // DOM Elements
+    var elemBank = document.getElementById("bank");
     var elemContainer = document.getElementById("container-app-1");
     var elemHistory = document.getElementById("history");
     var elemLanes = document.getElementById("lanes");
     var elemMessage = document.getElementById("message");
     var elemSelectors = document.getElementById("selectors");
-    var elemWallet = document.getElementById("wallet");
     var btnHistoryReset = document.getElementById("btn-reset-history");
     var btnRaceReset = document.getElementById("btn-reset");
     var btnRaceStart = document.getElementById("btn-start");
@@ -73,7 +73,7 @@
 
     // Ensure all elements exist
     if (!elemContainer || !elemLanes || !elemMessage ||
-        !elemWallet || !elemSelectors || !elemHistory ||
+        !elemBank || !elemSelectors || !elemHistory ||
         !btnRaceReset || !btnHistoryReset || !btnRaceStart) {
         alert("Some UI elements are missing. Game cannot load.");
         return;
@@ -217,25 +217,32 @@
     }
 
     function fn_message(winId, val, name) {
-        var strMessageReset = "<p>Resetting Race in " +
-        timeAutoReset + " seconds.</p>";
-        var strMessageWin = "Hooray <strong class='upper'>" +
+        var strMessageReset = "<em>Resetting in " +
+        timeAutoReset + " seconds.</em>";
+        var strMessageWin = "Hooray! <strong class='upper'>" +
             name +
-            "</strong> is the Winner! You Won <strong>" +
+            "</strong> Won. <br>You Won <strong>" +
             val +
-            "</strong> Credits.</p>" +
+            "</strong>" +
+            " Credit(s).<br>" +
             strMessageReset;
-        var strMessageLoss = "<strong class='upper'>" +
+
+        var strMessageLoss = "You lose <strong>" +
+            //val +
+            "1" +
+            "</strong> credit.<br>" +
+            "<strong class='upper'>" +
             name +
-            "</strong> is the Winner! You Lose <strong>" + val +
-            "</strong> Credits.</p>" +
+            "</strong> won the race.<br>" +
             strMessageReset;
         if (winId === val) {
             elemMessage.innerHTML = strMessageWin;
-            fn_wallet_ui(val);
+            //fn_bank_ui(val);
+            fn_bank_ui(val);
         } else {
             elemMessage.innerHTML = strMessageLoss;
-            fn_wallet_ui(-val);
+            //fn_bank_ui(-val);
+            fn_bank_ui(-1);
         }
         fn_selector_highlight_winner(winId);
         btnRaceReset.removeAttribute("disabled");
@@ -269,12 +276,12 @@
         if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
         if (horseAnimTimeout) clearTimeout(horseAnimTimeout);
         elemMessage.innerHTML = "";
-        var value = parseInt(elemWallet.value, 10);
+        var value = parseInt(elemBank.value, 10);
         if (value > 0) {
             fn_race_reset_buttons();
             fn_race_reset_lanes();
         } else {
-            alert("Funds Required to Reset Race! Refresh Page to Start Again.");
+            alert("Funds Required to Race! Refresh Page to Start Again.");
         }
     }
 
@@ -284,7 +291,7 @@
         cachedLanes = elemContainer.querySelectorAll(".lane");
         window.requestAnimationFrame(fn_race_positions);
         elemLanes.classList.add("race-progress");
-        elemMessage.innerHTML = "No Bets Please! Race in Progress.";
+        elemMessage.innerHTML = "<em>No Bets! Race in Progress.</em>";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
         horseAnimTimeout = setInterval(fn_sprite_anim, 300);
@@ -343,23 +350,26 @@
 
     function fn_race_ui() {
         var htmlLanes = "", htmlSelectors = "";
-        for (var i = 0; i < competitors.length; i++) {
-            var comp = competitors[i];
+        for (let index = competitors.length - 1; index >= 0; index--) {
+            var comp = competitors[index];
             var strClass = comp.dark ? "dark" : "";
             htmlLanes += "<div style='background-color: " + comp.color +
                 "' id='" + comp.id +
                 "' class='lane " + strClass +
-                "'><span>" + comp.name + "</span></div>";
+                "'><span>" + comp.name + ":" + comp.id +"</span>" +
+                "</div>";
             htmlSelectors += "<button style='background-color: " +
                 comp.color +
                 "' name='" + comp.id +
-                "' class='btn-selector " + strClass +
-                "'>" + comp.id + "<sup>c</sup></button>";
+                "' class='selector " + strClass +
+                "'>" + 
+                //comp.id + "</button>";
+                comp.id + "<sup>*</sup></button>";
         }
         elemLanes.innerHTML = htmlLanes;
         elemSelectors.innerHTML = htmlSelectors;
         cachedLanes = elemContainer.querySelectorAll(".lane");
-        cachedSelectors = elemContainer.querySelectorAll(".btn-selector");
+        cachedSelectors = elemContainer.querySelectorAll(".selector");
         fn_listeners_lane_selectors();
     }
 
@@ -374,16 +384,16 @@
     }
 
     function fn_update_ui() {
-        elemWallet.value = credits;
+        elemBank.value = credits;
         fn_race_ui();
         fn_history_ui();
         fn_listeners_selector();
     }
 
-    function fn_wallet_ui(val) {
-        var value = parseInt(elemWallet.value, 10);
+    function fn_bank_ui(val) {
+        var value = parseInt(elemBank.value, 10);
         value += parseInt(val, 10);
-        elemWallet.value = value;
+        elemBank.value = value;
     }
 
     window.onload = function () {

@@ -1,24 +1,26 @@
 /* main.css */
 
 body {
+  background-color: #ffffff;
   font-family: "Lucida Console", "Courier New", monospace;
   /*background-image: repeating-linear-gradient(45deg, #d8d8d8 0, #d8d8d8 1px, transparent 0, transparent 50%);
   background-size: 9px 9px;
   background-color: #ffffff;*/
-  background-color: #ffffff;
+}
+body,
+.ground {
   background-image: radial-gradient(circle at center, #d8d8d8 1px, transparent 1px);
   background-size: 5px 5px;
 }
 
 #container-app-1 {
-    min-width: 300px;
-    max-width: 3000px
+  min-width: 300px;
+  max-width: 3000px
 }
 
 h1 {
   word-wrap: break-word;
 }
-
 h1 span {
   font-size: 1.6em;
   border-color: #000000;
@@ -26,13 +28,6 @@ h1 span {
   animation-name: selectorsFlicker;
   animation-duration: 0.3s;
 }
-
-@media only screen and (max-width: 600px) {
-  h1 span {
-    font-size: 0.7em;
-  }
-}
-
 h1 span:nth-child(1) {
   background-color: #000000;
   color: #ffffff;
@@ -68,7 +63,6 @@ h1 span:nth-child(8) {
 }
 h1 span:nth-child(9) {
   background-color: #00ff1c;
-
 }
 h1 span:nth-child(10) {
   background-color: #01cfcf;
@@ -94,34 +88,26 @@ button {
   cursor: pointer;
   font-size: 1em;
   font-weight: 600;
+  min-height: 50px;
   padding: 6px 12px;
   text-transform: uppercase;
   animation-name: selectorsFlicker;
   animation-duration: 0.3s;
 }
-
-@media only screen and (min-width: 601px) {
-  button {
-    font-size: 1.3em;
-  }
-}
-
 button:not(:disabled):hover {
   background-color: #ffffff;
   border-color: #000000;
   color: #000000;
 }
-
 button:disabled {
   cursor: default;
-  opacity: 80%;
+  background-color: transparent;
+  color: #000000;
 }
-
-button.warning {
+button:not(:disabled).warning {
   background-color: #cf0100;
 }
-
-button.warm {
+button:not(:disabled).warm {
   background-color: #00cf15;
 }
 
@@ -129,18 +115,37 @@ em {
   font-size: 80%;
 }
 
-.lane span,
-.upper {
-  text-transform: uppercase;
+#bank {
+  background-color: transparent;
+  border: none;
+  font-size: 1.8em;
 }
 
 .ground {
+  display: flex;
   background-color: #d8d800;
-  background-image: radial-gradient(circle at center, #d8d8d8 1px, transparent 1px);
-  background-size: 5px 5px;
   border: 1px solid #000000;
+  flex-wrap: wrap;
   min-height: 215px;
-  position: relative;
+  position: relative; 
+}
+.ground p {
+  margin: 0;
+}
+.ground > div:nth-child(2) {
+  width: 25%;
+}
+.ground > div:nth-child(2) {
+  min-height: 60px;
+}
+.ground > div:nth-child(2) #bank,
+.ground > div:nth-child(2) label {
+  padding-left: 4px;
+}
+.ground > div:nth-child(2) #bank {
+  color: black;
+  font-weight: 600;
+  padding-left: 4px;
 }
 
 #history{
@@ -149,8 +154,8 @@ em {
 
 .track {
   position: relative;
+  width: 100%;
 }
-
 .track:before {
   background-image:
     linear-gradient(45deg, #d8d8d8 26%, transparent 26%), 
@@ -166,11 +171,9 @@ em {
   position: absolute;
   right: -16px;
   transform: rotate(90deg);
-  /*transform-origin: bottom left;*/
   text-transform: uppercase;
   top: 40%;
 }
-
 #lanes {
   background-color: #00cf15;
   background-image:
@@ -184,28 +187,19 @@ em {
   border-right: 5px solid #d8d800;
   overflow: hidden;
 }
-
 #lanes.race-progress {
   animation: Move 30s ease infinite;
 }
-
-@keyframes Move {
-  from { background-position: 100% 0; }
-  to { background-position: 0 0; }
-}
-
 #lanes > div {
   border: 1px solid #000000;
   font-size: 12px;  
-  height: 20px;
+  height: 28px;
   position: relative;
   width: 2px;
 }
-
 #lanes > div.active {
   border-color: #d8d800 !important;
 }
-
 #lanes > div span {
   font-size: 1.2em;
   font-weight: 600;
@@ -213,25 +207,28 @@ em {
   min-width: 30px;
   padding: 0 4px 0 20px;
 }
-
 #lanes > div.active span {
   font-size: 1.5em;
   font-weight: 800;
   background-color: #d8d800;
 }
-
 #lanes > div:after {
   position: absolute;
   right: -14px;
-  top: 0
+  scale: 110%;
+  top: 0;
 }
-
 #lanes > div:after {
   content: url("./horse-f1.webp");
 }
-
 #lanes.race-sprite-alt > div:after {
   content: url("./horse-f2.webp");
+}
+
+#message {
+  margin: 0;
+  padding-top: 4px;
+  width: 75%;
 }
 
 #selectors button {
@@ -239,8 +236,42 @@ em {
   min-height: 70px;
   min-width: 118px;
 }
+#selectors button.active {
+  border-color: #d8d800;
+  border-width: 5px;
+}
+#selectors button:not(.winner).loser {
+  background-color: white !important;
+  color: black  !important;
+}
+#selectors button.winner {
+  background-color: inherit;
+}
+#selectors button.dark {
+  color: #ffffff;
+}
+#selectors button:not(.winner):not(.active):not(:disabled):hover {
+  background-color: #ffffff !important;
+  border-color: #000000;
+  color: #000000;
+}
+#selectors button:disabled.dark,
+#selectors button:disabled.dark:hover,
+.dark,
+.dark span {
+  color: #ffffff;
+}
 
+.upper,
+.lane span {
+  text-transform: uppercase;
+}
+
+/* Media Querys */
 @media only screen and (max-width: 600px) {
+  h1 span {
+    font-size: 0.7em;
+  }
   #selectors {
     display: flex;
     flex-wrap: wrap;
@@ -252,8 +283,10 @@ em {
     outline-offset: -0.5px;
   }
 }
-
 @media only screen and (min-width: 601px) {
+  button {
+    font-size: 1.6em;
+  }
   #selectors button {
     font-size: 2em;
     margin: 0 8px 8px 0;
@@ -261,29 +294,11 @@ em {
   }
 }
 
-#selectors button.active {
-  border-color: #d8d800;
-  border-width: 5px;
+/* Animations */
+@keyframes Move {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
 }
-#selectors button:not(.winner).loser {
-  background-color: white !important;
-  color: black  !important;
-}
-
-#selectors button.winner {
-  background-color: inherit;
-}
-
-#selectors button.dark {
-  color: #ffffff;
-}
-
-#selectors button:not(.winner):not(.active):not(:disabled):hover {
-  background-color: #ffffff !important;
-  border-color: #000000;
-  color: #000000;
-}
-
 @keyframes selectorsFlicker {
   0%   {background-color: #000000;}
   12.5%  {background-color: #0200fd;}
@@ -293,27 +308,4 @@ em {
   62.5%  {background-color: #02ffff;}
   75%  {background-color: #ffff00;}
   100% {background-color: #ffffff;}
-}
-
-#wallet {
-  background-color: transparent;
-  border: none;
-  font-size: 1.8em;
-  text-align: right;
-}
-
-.stake-message {
-  color: #ffffff;
-  position: absolute;
-  right: 16px;
-  top: 8px;
-  font-size: 1em;
-  z-index: 2;
-}
-
-.dark,
-#selectors button:disabled.dark,
-#selectors button:disabled.dark:hover,
-.dark span {
-  color: #ffffff;
 }
