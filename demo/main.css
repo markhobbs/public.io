@@ -100,6 +100,12 @@ button {
   animation-duration: 0.3s;
 }
 
+@media only screen and (min-width: 601px) {
+  button {
+    font-size: 1.3em;
+  }
+}
+
 button:not(:disabled):hover {
   background-color: #ffffff;
   border-color: #000000;
@@ -145,7 +151,7 @@ em {
   position: relative;
 }
 
-.track:after {
+.track:before {
   background-image:
     linear-gradient(45deg, #d8d8d8 26%, transparent 26%), 
     linear-gradient(135deg, #d8d8d8 26%, transparent 26%),
@@ -159,7 +165,8 @@ em {
   padding: 4px 16px;
   position: absolute;
   right: -16px;
-  rotate: 90deg;
+  transform: rotate(90deg);
+  /*transform-origin: bottom left;*/
   text-transform: uppercase;
   top: 40%;
 }
@@ -227,23 +234,36 @@ em {
   content: url("./horse-f2.webp");
 }
 
-#selectors {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 #selectors button {
   color: #000000;
-  flex: 0 0 32%;
-  font-size: 1em;
-  outline: 0.5px solid #ffffff;
-  outline-offset: -0.5px;
-  min-height: 46px;
+  min-height: 70px;
+  min-width: 118px;
+}
+
+@media only screen and (max-width: 600px) {
+  #selectors {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #selectors button {
+    flex: 0 0 33.333%;
+    min-width: unset;
+    outline: 0.5px solid #ffffff;
+    outline-offset: -0.5px;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  #selectors button {
+    font-size: 2em;
+    margin: 0 8px 8px 0;
+    min-width: 118px;
+  }
 }
 
 #selectors button.active {
   border-color: #d8d800;
-  border-width: 3px;
+  border-width: 5px;
 }
 #selectors button:not(.winner).loser {
   background-color: white !important;
@@ -277,6 +297,7 @@ em {
 
 #wallet {
   background-color: transparent;
+  border: none;
   font-size: 1.8em;
   text-align: right;
 }
