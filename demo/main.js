@@ -79,6 +79,43 @@
         return;
     }
 
+    // === Timeout/Interval Management ===
+    function setAutoResetTimeout(callback, ms) {
+        clearAutoResetTimeout();
+        autoResetTimeout = setTimeout(callback, ms);
+    }
+    function clearAutoResetTimeout() {
+        if (autoResetTimeout) {
+            clearTimeout(autoResetTimeout);
+            autoResetTimeout = null;
+        }
+    }
+    function setHorseAnimInterval(callback, ms) {
+        clearHorseAnimInterval();
+        horseAnimTimeout = setInterval(callback, ms);
+    }
+    function clearHorseAnimInterval() {
+        if (horseAnimTimeout) {
+            clearInterval(horseAnimTimeout);
+            horseAnimTimeout = null;
+        }
+    }
+    function setFairyLightsInterval(callback, ms) {
+        clearFairyLightsInterval();
+        fairyLightsTimeout = setInterval(callback, ms);
+    }
+    function clearFairyLightsInterval() {
+        if (fairyLightsTimeout) {
+            clearInterval(fairyLightsTimeout);
+            fairyLightsTimeout = null;
+        }
+    }
+    function clearAllTimers() {
+        clearAutoResetTimeout();
+        clearFairyLightsInterval();
+        clearHorseAnimInterval();
+    }
+
     // Helper: Random delta for lane progress
     function fn_delta() {
         var arrDelta = [0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1, 2];
@@ -218,38 +255,19 @@
     }
 
     function fn_message(winId, val, name) {
-        var strMessageReset = "<em>Resetting in " +
-        timeAutoReset + " seconds.</em>";
-        var strMessageWin = "Hooray! <strong class='upper'>" +
-            name +
-            "</strong> Won. <br>You Won <strong>" +
-            val +
-            "</strong>" +
-            " Credit(s).<br>" +
-            strMessageReset;
-
-        var strMessageLoss = "You lose <strong>" +
-            //val +
-            "1" +
-            "</strong> credit.<br>" +
-            "<strong class='upper'>" +
-            name +
-            "</strong> won the race.<br>" +
-            strMessageReset;
+        var strMessageReset = "<em>Resetting in " + timeAutoReset + " seconds.</em>";
+        var strMessageWin = "Hooray! <strong class='upper'>" + name + "</strong> Won. <br>You Won <strong>" + val + "</strong> Credit(s).<br>" + strMessageReset;
+        var strMessageLoss = "You lose <strong>1</strong> credit.<br><strong class='upper'>" + name + "</strong> won the race.<br>" + strMessageReset;
         if (winId === val) {
             elemMessage.innerHTML = strMessageWin;
-            //fn_bank_ui(val);
             fn_bank_ui(val);
         } else {
             elemMessage.innerHTML = strMessageLoss;
-            //fn_bank_ui(-val);
             fn_bank_ui(-1);
         }
         fn_selector_highlight_winner(winId);
         btnRaceReset.removeAttribute("disabled");
-        // Use setTimeout for auto-reset (not setInterval)
-        if (autoResetTimeout) clearTimeout(autoResetTimeout);
-        autoResetTimeout = setTimeout(fn_race_reset, timeAutoReset * 1000);
+        setAutoResetTimeout(fn_race_reset, timeAutoReset * 1000);
     }
 
     function fn_race_lane(e) {
@@ -273,9 +291,7 @@
     function fn_race_reset() {
         isRunning = false;
         elemLanes.classList.remove("race-progress");
-        if (autoResetTimeout) clearTimeout(autoResetTimeout);
-        if (fairyLightsTimeout) clearTimeout(fairyLightsTimeout);
-        if (horseAnimTimeout) clearTimeout(horseAnimTimeout);
+        clearAllTimers();
         elemMessage.innerHTML = "";
         var value = parseInt(elemBank.value, 10);
         if (value > 0) {
@@ -295,10 +311,9 @@
         elemMessage.innerHTML = "<em>No Bets! Race in Progress.</em>";
         btnRaceStart.setAttribute("disabled", "disabled");
         btnRaceReset.setAttribute("disabled", "disabled");
-        horseAnimTimeout = setInterval(fn_sprite_anim, 300);
+        setHorseAnimInterval(fn_sprite_anim, 300);
         if (hasFairyLights) {
-            fairyLightsTimeout = setInterval(
-                fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
+            setFairyLightsInterval(fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
         }
     }
 
