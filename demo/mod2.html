@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Spectrum Derby, JavaScript Racing Game. Solid Canvas Version. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Spectrum, ZX, Sinclair, sea-side, theme parks, palette">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Spectrum Derby (Solid Canvas Version)</title>
+  <style>
+    body { 
+      font-family: "Lucida Console", "Courier New", monospace; 
+      background: #ffffff; 
+      background-image: radial-gradient(circle at center, #cfcfcf 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+    main { max-width: 900px; margin: 2rem auto; }
+    canvas { 
+      background: #cfcfcf;
+      background-image: radial-gradient(circle at center, #ffffff 1px, transparent 1px);
+      background-size: 6px 6px;
+      border-radius: 1rem;
+      display: block; 
+      margin: 2rem 0;
+    }
+    h1 { word-wrap: break-word }
+    h1 span { font-size: 1.6em; border-color: #000000; padding: 0 2px; animation-name: selectorsFlicker; animation-duration: 0.3s }
+    h1 span:nth-child(1) { background-color: #000000; color: #ffffff }
+    h1 span:nth-child(2) { background-color: #0100ce; color: #ffffff }
+    h1 span:nth-child(3) { background-color: #0200fd; color: #ffffff }
+    h1 span:nth-child(4) { background-color: #cf0100; color: #ffffff }
+    h1 span:nth-child(5) { background-color: #ff0201; color: #ffffff }
+    h1 span:nth-child(6) { background-color: #cf01ce; color: #ffffff }
+    h1 span:nth-child(7) { background-color: #ff02fd; color: #ffffff }
+    h1 span:nth-child(8) { background-color: #00cf15; color: #ffffff }
+    h1 span:nth-child(9) { background-color: #00ff1c }
+    h1 span:nth-child(10) { background-color: #01cfcf }
+    h1 span:nth-child(11) { background-color: #02ffff }
+    h1 span:nth-child(12) { background-color: #cfcf15 }
+    h1 span:nth-child(13) { background-color: #ffff1d }
+    h1 span:nth-child(14) { background-color: #cfcfcf }
+    ul#nav-primary {margin-top: 10px; padding: 0; }
+    ul#nav-primary li {list-style: none; margin-bottom:12px; }
+    a:link { color: #0100ce; }
+    a:visited { color: #0200fd; }
+    a:hover { color: #00cf15; }
+    a:active { color: #00ff1c; }
+    button {
+      background-color: #000000;
+      border: 1px solid #000000;
+      border-color: #000000;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 1em;
+      font-size: 1.2rem; 
+      font-weight: 600;
+      margin: 0 0.5rem;
+      min-height: 50px;
+      padding: 6px 12px;
+      text-transform: uppercase;
+      animation-name: selectorsFlicker;
+      animation-duration: 0.3s;
+    }
+    button:not(:disabled):hover {
+      background-color: #ffffff;
+      border-color: #000000;
+      color: #000000;
+    }
+    button:disabled {
+      cursor: default;
+      background-color: #ffffff;
+      color: #000000;
+    }
+    button:not(:disabled).warning {
+      background-color: #cf0100;
+    }
+    button:not(:disabled).warm {
+      background-color: #00cf15;
+    }
+    @keyframes selectorsFlicker {
+      0%   {background-color: #000000;}
+      12.5%  {background-color: #0200fd;}
+      25%  {background-color: #ff0201;}
+      37.5% {background-color: #cf01ce;}
+      50%   {background-color: #00ff1c;}
+      62.5%  {background-color: #02ffff;}
+      75%  {background-color: #ffff00;}
+      100% {background-color: #ffffff;}
+    }
+  </style>
+</head>
+  <body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <main>
+      <h1>
+        <span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><!-- 
+        --><span>m</span><span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
+      </h1>
+      <p>Spectrum Derby (Solid Canvas Version)</p>
+      <canvas id="raceCanvas" width="900" height="430"></canvas>
+      <div>
+        <button id="startBtn">Start Race</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+      <p id="status"></p>
+    </main>
+    <script type="module">
+      class Horse {
+        constructor(name, color, index, trackLength) {
+          this.name = name;
+          this.color = color;
+          this.index = index;
+          this.position = 0;
+          this.trackLength = trackLength;
+        }
+        advance() {
+          this.position += Math.random() * 6 + 1;
+          if (this.position > this.trackLength) this.position = this.trackLength;
+        }
+        reset() { this.position = 0; }
+      }
+
+      class Game {
+        constructor(canvas, statusEl, horsesData, trackLength) {
+          this.canvas = canvas;
+          this.ctx = canvas.getContext('2d');
+          this.statusEl = statusEl;
+          this.trackLength = trackLength;
+          this.horses = horsesData.map((h, i) => new Horse(h.name, h.color, i, trackLength));
+          this.raceInterval = null;
+          this.running = false;
+          this.trackPadding = 40;
+          this.horseRadius = 20;
+          this.finishLineX = canvas.width - this.trackPadding;
+        }
+
+        renderTrack() {
+          const { ctx, canvas, horses, trackPadding, horseRadius } = this;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          horses.forEach((horse, i) => {
+            // Track
+            const y = trackPadding + i * (2.5 * horseRadius);
+            ctx.strokeStyle = '#eee';
+            ctx.lineWidth = 16;
+            ctx.beginPath();
+            ctx.moveTo(trackPadding, y);
+            ctx.lineTo(this.finishLineX, y);
+            ctx.stroke();
+
+            // Horse
+            const percent = horse.position / this.trackLength;
+            const x = trackPadding + percent * (this.finishLineX - trackPadding);
+            ctx.fillStyle = horse.color;
+            ctx.beginPath();
+            ctx.arc(x, y, horseRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = "bold 20px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(horse.name[0], x, y);
+
+            // Finish line
+            ctx.save();
+            ctx.strokeStyle = "#222";
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(this.finishLineX, trackPadding - horseRadius);
+            ctx.lineTo(this.finishLineX, canvas.height - trackPadding + horseRadius);
+            ctx.stroke();
+            ctx.restore();
+          });
+        }
+
+        startRace() {
+          if (this.running) return;
+          this.running = true;
+          this.statusEl.textContent = "Race in progress...";
+          this.horses.forEach(h => h.reset());
+          this.renderTrack();
+          this.raceInterval = setInterval(() => this.tick(), 100);
+        }
+
+        tick() {
+          this.horses.forEach(h => h.advance());
+          this.renderTrack();
+          const winner = this.horses.find(h => h.position >= this.trackLength);
+          if (winner) {
+            clearInterval(this.raceInterval);
+            this.running = false;
+            this.statusEl.textContent = `🏆 ${winner.name} wins!`;
+          }
+        }
+
+        resetRace() {
+          clearInterval(this.raceInterval);
+          this.running = false;
+          this.horses.forEach(h => h.reset());
+          this.renderTrack();
+          this.statusEl.textContent = "Ready for the next race!";
+        }
+      }
+
+      // Config
+      const HORSES = [
+        { color: "#000000", dark: true, id: 200, name: "Black" },
+        { color: "#0200fd", dark: true, id: 100, name: "Blue" },
+        { color: "#ff0201", dark: false, id: 50, name: "Red" },
+        { color: "#ff02fd", dark: false, id: 20, name: "Magenta" },
+        { color: "#00ff1c", dark: false, id: 10, name: "Green" },
+        { color: "#02ffff", dark: false, id: 5, name: "Cyan" },
+        { color: "#ffff1d", dark: false, id: 2, name: "Yellow" },
+        { color: "#cfcfcf", dark: false, id: 1, name: "White" }
+      ];
+      const TRACK_LENGTH = 100;
+
+      const canvas = document.getElementById('raceCanvas');
+      const statusEl = document.getElementById('status');
+      const game = new Game(canvas, statusEl, HORSES, TRACK_LENGTH);
+
+      document.getElementById('startBtn').onclick = () => game.startRace();
+      document.getElementById('resetBtn').onclick = () => game.resetRace();
+
+      game.renderTrack();
+      game.resetRace();
+    </script>
+
+    <!-- Navigation -->
+    <p>Performance Comparisons</p>
+    <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
+      <li role="none">
+        <a role="menuitem" href="index.html" aria-label="Legacy Version Inline">Legacy Version (15kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod0.html" aria-label="Legacy Version Non Inline">Legacy Version (22kb) Non Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod1.html" aria-label="ES6/HTML5 Version Inline">ES6/HTML5 Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod2.html" aria-label="SOLID Canvas Version Inline">SOLID Canvas Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <br>
+        <a role="menuitem" href="/" aria-label="Home">Back</a>
+    </ul>
+    <!-- End of Navigation-->
+
+  </body>
+</html>

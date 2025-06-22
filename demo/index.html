@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Spectrum Derby :: Place Your Bet</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Simple JavaScript Racing Game. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
+    <meta name="description" content="Spectrum Derby, JavaScript Racing Game. Legacy Version. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
     <meta name="keywords" content="HTML, CSS, JavaScript, Spectrum, ZX, Sinclair, sea-side, theme parks, palette">
     <meta name="author" content="Mark Hobbs">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.min.css" media="all">
+    <title>Spectrum Derby :: Place Your Bet</title>
+    <style>
+        body{background:#fff radial-gradient(circle,#cfcfcf 1px,#0000 1px) 0 0/12px 12px;font-family:Lucida Console,Courier New,monospace}body,.ground{background-image:radial-gradient(circle,#cfcfcf 1px,#0000 1px)}.ground{background-size:6px 6px}#container-app-1{min-width:300px;max-width:3000px}h1{word-wrap:break-word}h1 span{border-color:#000;padding:0 2px;font-size:1.6em;animation-name:selectorsFlicker;animation-duration:.3s}h1 span:first-child{color:#fff;background-color:#000}h1 span:nth-child(2){color:#fff;background-color:#0100ce}h1 span:nth-child(3){color:#fff;background-color:#0200fd}h1 span:nth-child(4){color:#fff;background-color:#cf0100}h1 span:nth-child(5){color:#fff;background-color:#ff0201}h1 span:nth-child(6){color:#fff;background-color:#cf01ce}h1 span:nth-child(7){color:#fff;background-color:#ff02fd}h1 span:nth-child(8){color:#fff;background-color:#00cf15}h1 span:nth-child(9){background-color:#00ff1c}h1 span:nth-child(10){background-color:#01cfcf}h1 span:nth-child(11){background-color:#02ffff}h1 span:nth-child(12){background-color:#cfcf15}h1 span:nth-child(13){background-color:#ffff1d}h1 span:nth-child(14){background-color:#cfcfcf}button{color:#fff;cursor:pointer;text-transform:uppercase;background-color:#000;border:1px solid #000;min-height:50px;padding:6px 12px;font-size:1em;font-weight:600;animation-name:selectorsFlicker;animation-duration:.3s}button:not(:disabled):hover{color:#000;background-color:#fff;border-color:#000}button:disabled{cursor:default;color:#000;background-color:#fff}button:not(:disabled).warning{background-color:#cf0100}button:not(:disabled).warm{background-color:#00cf15}em{font-size:80%}#bank{background-color:#0000;border:none;font-size:1.8em}.ground{background-color:#d8d800;border:1px solid #000;flex-wrap:wrap;min-height:215px;display:flex;position:relative}.ground p{margin:0}.ground>div:nth-child(2){width:25%;min-height:60px}.ground>div:nth-child(2) #bank,.ground>div:nth-child(2) label{padding-left:4px}.ground>div:nth-child(2) #bank{color:#000;padding-left:4px;font-weight:600}#history{overflow-wrap:break-word}#lanes{background-color:#00cf15;background-image:linear-gradient(45deg,#00cf15 26%,#0000 26%),linear-gradient(135deg,#00ff1c 26%,#0000 26%),linear-gradient(45deg,#0000 75%,#d8d800 75%),linear-gradient(135deg,#0000 75%,#00cf15 75%);background-position:0 0,10px 0,10px -10px,0 10px;background-size:20px 20px;border-left:5px solid #d8d800;border-right:5px solid #d8d800;overflow:hidden}#lanes.race-progress{animation:30s infinite Move}#lanes>div{border:1px solid #000;width:2px;height:28px;font-size:12px;position:relative}#lanes>div.active{border-color:#d8d800!important}#lanes>div span{min-width:30px;margin-bottom:4px;padding:0 4px 0 20px;font-size:1.2em;font-weight:600}#lanes>div.active span{background-color:#d8d800;font-size:1.5em;font-weight:800}#lanes>div:after{content:url(data:image/gif;base64,R0lGODlhLgAZAKUiAAAAAAEBAQICAgMDAwUFBQYGBgcHBwgICAkJCQoKCgwMDA0NDRYWFhoaGh0dHR8fHyIiIiQkJCYmJikpKSsrKzExMTQ0NDo6OkBAQEFBQURERElJSU1NTVRUVFZWVldXV2FhYW9vb////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAD8ALAAAAAAuABkAAAbPwJ9wSCwaj8ikcskUcprQ6M+T0UwomYx0W0wwDIMBQRAALArcbQPABgTe8EC6CRC02fG41F1uG993bXkBZANLBAQPBniBjQADfYJvQoR+RwEOFT+DgI6eckYCAkcDEReUnJ6eSyEbDg0SEB8gQ5yRqndMHR0eGB5FhIO4jXNCBXYABgoECJ3Dc45oQwfIqqBbbmRuSnGWcFzJCQZ7AMDXdGGGUgXjoVEE6lujSPNKBAAEafVzFvtS/vSQFJDGBWASUcWOGEz4jyHDhQ4jHgkCADs=);position:absolute;top:0;right:-14px;scale:110%}#lanes.race-sprite-alt>div:after{content:url(data:image/gif;base64,R0lGODlhLgAZAKUlAAAAAAEBAQICAgMDAwUFBQYGBgcHBwgICAkJCQoKCgwMDA0NDQ4ODhAQEBERERMTExQUFBgYGBsbGxwcHB4eHiIiIiYmJioqKjExMTIyMjc3Nzo6Ojs7O0RERFNTU1RUVFVVVVhYWF9fX2FhYWxsbP///////////////////////////////////////////////////////////////////////////////////////////////////////////yH+EUNyZWF0ZWQgd2l0aCBHSU1QACH5BAEKAD8ALAAAAAAuABkAAAb+wJ9wSCwaj8cMBslsOoekzgQBIRQMgqfWybkEBAAAGAzYmomfRqQgCAwCYXj4fD6ww/GAfk8fCrJGCwUFA214AG5CewFnBWJ/AgQJCwkMBgdfcoeAQ3pPgxuFkH8EkQkKAwSHq30DFRc/BG9iiAcIDAwId6uHZw8UFh5CspoAAwUJCbu8eE0hIBIWGxoiIUTEYZEEAYPFvJ5NHiPCR9gCCAsHj8yHi5xn2W4KDD+Lq4t7o3SFPwsKBwmKkMlDBNyPd0/eDDGwwAEdTgiZyOLUkN7DiE4GXKPURwhGJhqJFOhI5KORkEQQkHx4pMzKl/Vg+umIUmYfQjZz6tx5JggAOw==)}#message{width:75%;margin:0;padding-top:4px}.track{width:100%;position:relative}.track:before{content:"Finish";text-transform:uppercase;background-image:linear-gradient(45deg,#d8d8d8 26%,#0000 26%),linear-gradient(135deg,#d8d8d8 26%,#0000 26%),linear-gradient(45deg,#0000 75%,#d8d8d8 75%),linear-gradient(135deg,#0000 75%,#d8d8d8 75%);background-position:0 0,10px 0,10px -10px,0 10px;background-size:20px 20px;padding:4px 16px;font-weight:600;display:block;position:absolute;top:40%;right:-16px;transform:rotate(90deg)}ul#nav-primary{margin-top:10px;padding:0}ul#nav-primary li{margin-bottom:12px;list-style:none}#selectors button{color:#000;min-width:118px;min-height:70px}#selectors button.active{border-width:5px;border-color:#d8d800}#selectors button:not(.winner).loser{color:#000!important;background-color:#fff!important}#selectors button.winner{background-color:inherit}#selectors button.dark{color:#fff}#selectors button:not(.winner):not(.active):not(:disabled):hover{color:#000;border-color:#000;background-color:#fff!important}#selectors button:disabled.dark,#selectors button:disabled.dark:hover,.dark,.dark span{color:#fff}.upper,.lane span{text-transform:uppercase}@media only screen and (width<=600px){h1 span{font-size:.7em}#selectors{flex-wrap:wrap;display:flex}#selectors button{min-width:unset;outline-offset:-.5px;outline:.5px solid #fff;flex:0 0 33.333%}}@media only screen and (width>=601px){button{font-size:1.6em}#selectors button{min-width:118px;margin:0 8px 8px 0;font-size:2em}}@keyframes Move{0%{background-position:100% 0}to{background-position:0 0}}@keyframes selectorsFlicker{0%{background-color:#000}12.5%{background-color:#0200fd}25%{background-color:#ff0201}37.5%{background-color:#cf01ce}50%{background-color:#00ff1c}62.5%{background-color:#02ffff}75%{background-color:#ff0}to{background-color:#fff}}
+    </style>
 </head>
 <body>
     <noscript>Your browser does not support JavaScript!</noscript>
@@ -39,6 +41,388 @@
         <p id="history" role="status"></p>
         <button id="btn-reset-history" class="warning">Delete Form Card</button>
     </div>
-    <script src="main.js"></script>
+
+    <script type="module">
+    (function () {
+        "use strict";
+        var betCount = 0;
+        var betMax = 1;
+        var bolShowSpriteAlt = true;
+        var credits = 5000;
+        var curValue = 0;
+        var fairyLightsTimeout = null;
+        var hasFairyLights = true;
+        var laneStartPosition = 2;
+        var laneMaxLength = 300;
+        var autoResetTimeout = null;
+        var horseAnimTimeout = null;
+        var isRunning = false;
+        var timeAutoReset = 5; // seconds
+        var timeFairyLight = 0.3; // seconds
+        var storageFallback = {};
+        var cachedLanes = [];
+        var cachedSelectors = [];
+        var elemBank = document.getElementById("bank");
+        var elemContainer = document.getElementById("container-app-1");
+        var elemHistory = document.getElementById("history");
+        var elemLanes = document.getElementById("lanes");
+        var elemMessage = document.getElementById("message");
+        var elemSelectors = document.getElementById("selectors");
+        var btnHistoryReset = document.getElementById("btn-reset-history");
+        var btnRaceReset = document.getElementById("btn-reset");
+        var btnRaceStart = document.getElementById("btn-start");
+        var elemTrack = (elemContainer ? elemContainer.getElementsByClassName("track"): []);
+        var competitors = [
+            { color: "#000000", dark: true, id: 200, name: "black" },
+            { color: "#0200fd", dark: true, id: 100, name: "blue" },
+            { color: "#ff0201", dark: false, id: 50, name: "red" },
+            { color: "#ff02fd", dark: false, id: 20, name: "magenta" },
+            { color: "#00ff1c", dark: false, id: 10, name: "green" },
+            { color: "#02ffff", dark: false, id: 5, name: "cyan" },
+            { color: "#ffff1d", dark: false, id: 2, name: "yellow" },
+            { color: "#cfcfcf", dark: false, id: 1, name: "white" }
+        ];
+        var storage = {
+            getItem: function (key) {
+                try {
+                    return window.localStorage.getItem(key);
+                } catch (e) {
+                    return storageFallback[key] || null;
+                }
+            },
+            removeItem: function (key) {
+                try {
+                    window.localStorage.removeItem(key);
+                } catch (e) {
+                    delete storageFallback[key];
+                }
+            },
+            setItem: function (key, value) {
+                try {
+                    window.localStorage.setItem(key, value);
+                } catch (e) {
+                    storageFallback[key] = value;
+                }
+            }
+        };
+        if (!elemContainer || !elemLanes || !elemMessage ||
+            !elemBank || !elemSelectors || !elemHistory ||
+            !btnRaceReset || !btnHistoryReset || !btnRaceStart) {
+            alert("Some UI elements are missing. Game cannot load.");
+            return;
+        }
+        function setAutoResetTimeout(callback, ms) {
+            clearAutoResetTimeout();
+            autoResetTimeout = setTimeout(callback, ms);
+        }
+        function clearAutoResetTimeout() {
+            if (autoResetTimeout) {
+                clearTimeout(autoResetTimeout);
+                autoResetTimeout = null;
+            }
+        }
+        function setHorseAnimInterval(callback, ms) {
+            clearHorseAnimInterval();
+            horseAnimTimeout = setInterval(callback, ms);
+        }
+        function clearHorseAnimInterval() {
+            if (horseAnimTimeout) {
+                clearInterval(horseAnimTimeout);
+                horseAnimTimeout = null;
+            }
+        }
+        function setFairyLightsInterval(callback, ms) {
+            clearFairyLightsInterval();
+            fairyLightsTimeout = setInterval(callback, ms);
+        }
+        function clearFairyLightsInterval() {
+            if (fairyLightsTimeout) {
+                clearInterval(fairyLightsTimeout);
+                fairyLightsTimeout = null;
+            }
+        }
+        function clearAllTimers() {
+            clearAutoResetTimeout();
+            clearFairyLightsInterval();
+            clearHorseAnimInterval();
+        }
+        function fn_delta() {
+            var arrDelta = [0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1, 2];
+            var random = Math.floor(Math.random() * arrDelta.length);
+            return arrDelta[random];
+        }
+        function fn_get_random_int(max) {
+            return Math.floor(Math.random() * max);
+        }
+        function fn_history_store(val) {
+            var hasHistory = storage.getItem("history");
+            var historyBuilderString = (hasHistory ? hasHistory + "," + val : val);
+            storage.setItem("history", historyBuilderString);
+            fn_history_ui();
+        }
+        function fn_history_ui() {
+            var hasHistory = storage.getItem("history");
+            if (hasHistory) {
+                btnHistoryReset.removeAttribute("disabled");
+                var arrHistory = hasHistory.split(",");
+                var count = {};
+                for (var i = 0; i < arrHistory.length; i++) {
+                    var item = arrHistory[i];
+                    count[item] = (count[item] || 0) + 1;
+                }
+                elemHistory.innerHTML = "<pre>" +
+                JSON.stringify(count, null, 2) + "</pre>";
+            } else {
+                btnHistoryReset.setAttribute("disabled", "disabled");
+                elemHistory.innerHTML = "<p>No Race History As Yet</p>";
+            }
+        }
+        function fn_listeners_selector() {
+            btnRaceStart.addEventListener("click", fn_race_start, false);
+            btnRaceReset.addEventListener("click", fn_race_reset, false);
+            btnHistoryReset.addEventListener("click", fn_history_reset, false);
+        }
+        function fn_listeners_lane_selectors() {
+            for (var i = 0; i < cachedSelectors.length; i++) {
+                cachedSelectors[i].addEventListener("click", fn_race_lane, false);
+            }
+        }
+        function fn_race_positions() {
+            if (!isRunning) return;
+            var winnerIndex = -1;
+            for (var i = 0; i < cachedLanes.length; i++) {
+                var lane = cachedLanes[i];
+                var curWidth = lane.offsetWidth;
+                var laneStartPositionDup = laneStartPosition;
+                var newlaneStartPosition = Math.floor(curWidth +
+                    (laneStartPositionDup * fn_delta()));
+                if (curWidth < laneMaxLength) {
+                    lane.style.width = newlaneStartPosition + "px";
+                } else if (winnerIndex === -1) {
+                    winnerIndex = i;
+                }
+            }
+            laneStartPositionDup++;
+            if (winnerIndex > -1) {
+                if (hasFairyLights) {
+                    for (var i = 0; i < cachedSelectors.length; i++) {
+                        if (cachedSelectors[i].classList.contains("loser")) {
+                            cachedSelectors[i].classList.remove("loser");
+                        }
+                        if (cachedSelectors[i].classList.contains("winner")) {
+                            cachedSelectors[i].classList.remove("winner");
+                        }
+                        cachedSelectors[i].disabled = false;
+                    }
+                    clearTimeout(fairyLightsTimeout);
+                }
+                var winnerLane = cachedLanes[winnerIndex];
+                var curName = winnerLane.getElementsByTagName("span")[0].innerHTML;
+                var winnerId = winnerLane.getAttribute("id");
+                isRunning = false;
+                fn_message(winnerId, curValue, curName);
+                fn_history_store(winnerId);
+                btnRaceReset.focus();
+            } else {
+                window.requestAnimationFrame(fn_race_positions);
+            }
+        }
+        function fn_race_ready_buttons() {
+            for (var i = 0; i < cachedSelectors.length; i++) {
+                cachedSelectors[i].disabled = true;
+            }
+            btnRaceStart.removeAttribute("disabled");
+        }
+        function fn_race_reset_buttons() {
+            for (var i = 0; i < cachedSelectors.length; i++) {
+                if (cachedSelectors[i].classList.contains("active")) {
+                    cachedSelectors[i].classList.remove("active");
+                }
+                if (cachedSelectors[i].classList.contains("loser")) {
+                    cachedSelectors[i].classList.remove("loser");
+                }
+                if (cachedSelectors[i].classList.contains("winner")) {
+                    cachedSelectors[i].classList.remove("winner");
+                }
+                cachedSelectors[i].disabled = false;
+            }
+            btnRaceStart.setAttribute("disabled", "disabled");
+            btnRaceReset.setAttribute("disabled", "disabled");
+        }
+        function fn_race_reset_lanes() {
+            betCount = 0;
+            for (var i = 0; i < cachedLanes.length; i++) {
+                cachedLanes[i].style.width = laneStartPosition + "px";
+                if (cachedLanes[i].classList.contains("active")) {
+                    cachedLanes[i].classList.remove("active");
+                }
+            }
+        }
+        function fn_history_reset() {
+            var text = "Are You Sure? This Action Will Delete All Race History.";
+            if (confirm(text)) {
+                storage.removeItem("history");
+                fn_history_ui();
+            }
+        }
+
+        function fn_message(winId, val, name) {
+            var strMessageReset = "<em>Resetting in " + timeAutoReset + " seconds.</em>";
+            var strMessageWin = "Hooray! <strong class='upper'>" + name + "</strong> Won. <br>You Won <strong>" + val + "</strong> Credit(s).<br>" + strMessageReset;
+            var strMessageLoss = "You lose <strong>1</strong> credit.<br><strong class='upper'>" + name + "</strong> won the race.<br>" + strMessageReset;
+            if (winId === val) {
+                elemMessage.innerHTML = strMessageWin;
+                fn_bank_ui(val);
+            } else {
+                elemMessage.innerHTML = strMessageLoss;
+                fn_bank_ui(-1);
+            }
+            fn_selector_highlight_winner(winId);
+            btnRaceReset.removeAttribute("disabled");
+            setAutoResetTimeout(fn_race_reset, timeAutoReset * 1000);
+        }
+        function fn_race_lane(e) {
+            if (isRunning) {
+                alert("No Bets Please! Race in Progress.");
+                return;
+            }
+            btnRaceReset.removeAttribute("disabled");
+            if (betCount < betMax) {
+                var current_pick = document.getElementById(this.name);
+                current_pick.classList.add("active");
+                curValue = current_pick.getAttribute("id");
+                fn_race_ready_buttons();
+                this.classList.add("active");
+                betCount++;
+            } else {
+                alert("Change Bet!  " + betMax + " Bet Max.");
+            }
+        }
+        function fn_race_reset() {
+            isRunning = false;
+            elemLanes.classList.remove("race-progress");
+            clearAllTimers();
+            elemMessage.innerHTML = "";
+            var value = parseInt(elemBank.value, 10);
+            if (value > 0) {
+                fn_race_reset_buttons();
+                fn_race_reset_lanes();
+            } else {
+                alert("Funds Required to Race! Refresh Page to Start Again.");
+            }
+        }
+        function fn_race_start() {
+            isRunning = true;
+            laneMaxLength = elemTrack[0].clientWidth;
+            cachedLanes = elemContainer.querySelectorAll(".lane");
+            window.requestAnimationFrame(fn_race_positions);
+            elemLanes.classList.add("race-progress");
+            elemMessage.innerHTML = "<em>No Bets! Race in Progress.</em>";
+            btnRaceStart.setAttribute("disabled", "disabled");
+            btnRaceReset.setAttribute("disabled", "disabled");
+            setHorseAnimInterval(fn_sprite_anim, 300);
+            if (hasFairyLights) {
+                setFairyLightsInterval(fn_fairy_lights_alt1, parseInt(timeFairyLight * 1000));
+            }
+        }
+        function fn_sprite_anim() {
+            if (bolShowSpriteAlt === true) {
+                bolShowSpriteAlt = false;
+                elemLanes.classList.add("race-sprite-alt");
+            } else {
+                bolShowSpriteAlt = true;
+                elemLanes.classList.remove("race-sprite-alt");
+            }
+        }
+        function fn_fairy_lights_alt1() {
+            if (cachedSelectors.length < 2) return;
+            var rand1 = fn_get_random_int(cachedSelectors.length);
+            var rand2;
+            do {rand2 = fn_get_random_int(cachedSelectors.length)}
+            while (rand2 === rand1);
+            for (var i = 0; i < cachedSelectors.length; i++) {
+                if (cachedSelectors[i].classList.contains("loser")) {
+                    cachedSelectors[i].classList.remove("loser");
+                }
+                if (cachedSelectors[i].classList.contains("winner")) {
+                    cachedSelectors[i].classList.remove("winner");
+                }
+            }
+            if (cachedSelectors[rand1] && cachedSelectors[rand2]) {
+                cachedSelectors[rand1].classList.add("loser");
+                cachedSelectors[rand2].classList.add("winner");
+            }
+        }
+        function fn_race_ui() {
+            var htmlLanes = "", htmlSelectors = "";
+            for (let index = competitors.length - 1; index >= 0; index--) {
+                var comp = competitors[index];
+                var strClass = comp.dark ? "dark" : "";
+                htmlLanes += "<div style='background-color: " + comp.color +
+                    "' id='" + comp.id +
+                    "' class='lane " + strClass +
+                    "'><span>" + comp.name + ":" + comp.id +"</span>" +
+                    "</div>";
+                htmlSelectors += "<button style='background-color: " +
+                    comp.color +
+                    "' name='" + comp.id +
+                    "' class='selector " + strClass +
+                    "'>" +
+                    comp.id + "<sup>*</sup></button>";
+            }
+            elemLanes.innerHTML = htmlLanes;
+            elemSelectors.innerHTML = htmlSelectors;
+            cachedLanes = elemContainer.querySelectorAll(".lane");
+            cachedSelectors = elemContainer.querySelectorAll(".selector");
+            fn_listeners_lane_selectors();
+        }
+        function fn_selector_highlight_winner(val) {
+            for (var i = 0; i < cachedSelectors.length; i++) {
+                if (cachedSelectors[i].name === val) {
+                    cachedSelectors[i].classList.add("winner");
+                } else {
+                    cachedSelectors[i].classList.add("loser");
+                }
+            }
+        }
+        function fn_update_ui() {
+            elemBank.value = credits;
+            fn_race_ui();
+            fn_history_ui();
+            fn_listeners_selector();
+        }
+        function fn_bank_ui(val) {
+            var value = parseInt(elemBank.value, 10);
+            value += parseInt(val, 10);
+            elemBank.value = value;
+        }
+        window.onload = function () {
+            fn_update_ui();
+            fn_race_reset_buttons();
+        };
+    })();
+    </script>
+
+    <!-- Navigation -->
+    <p>Performance Comparisons</p>
+    <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
+      <li role="none">
+        <a role="menuitem" href="index.html" aria-label="Legacy Version Inline">Legacy Version (15kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod0.html" aria-label="Legacy Version Non Inline">Legacy Version (22kb) Non Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod1.html" aria-label="ES6/HTML5 Version Inline">ES6/HTML5 Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod2.html" aria-label="SOLID Canvas Version Inline">SOLID Canvas Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <br>
+        <a role="menuitem" href="/" aria-label="Home">Back</a>
+    </ul>
+    <!-- End of Navigation-->
+
 </body>
 </html>
