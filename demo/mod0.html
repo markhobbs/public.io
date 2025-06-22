@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Spectrum Derby :: Place Your Bet</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Simple JavaScript Racing Game. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Spectrum, ZX, Sinclair, sea-side, theme parks, palette">
+    <meta name="author" content="Mark Hobbs">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.min.css" media="all">
+</head>
+<body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <div id="container-app-1">
+        <h1>
+            <span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><!-- 
+            --><span>m</span><span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
+        </h1>
+        <div class="ground">
+            <div class="track">
+                <div id="lanes"><!-- Empty --></div>
+            </div>
+            <div>
+                <label for="bank">Bank</label>
+                <br />
+                <input id="bank" name="bank" type="text" disabled="disabled" maxlength="5" size="5">
+            </div>
+            <p id="message" role="status"></p>
+            <p><em>*1<sup>c/race</sup></em></p>
+        </div>
+        
+        <h2>Place Your Bet</h2>
+        <div id="selectors"><!-- Empty --></div>
+        <p>
+            <button id="btn-reset">Change Bet</button>
+            <button id="btn-start" class="warm">Race</button>
+        </p>
+        <h2>Form Card</h2>
+        <p id="history" role="status"></p>
+        <button id="btn-reset-history" class="warning">Delete Form Card</button>
+    </div>
+    <script src="main.js"></script>
+
+    <!-- Navigation -->
+    <p>Performance Comparisons</p>
+    <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
+      <li role="none">
+        <a role="menuitem" href="index.html" aria-label="Legacy Version Inline">Legacy Version (15kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod0.html" aria-label="Legacy Version Non Inline">Legacy Version (22kb) Non Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod1.html" aria-label="ES6/HTML5 Version Inline">ES6/HTML5 Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <a role="menuitem" href="mod2.html" aria-label="SOLID Canvas Version Inline">SOLID Canvas Version (6kb) Inline</a>
+      </li>
+      <li role="none">
+        <br>
+        <a role="menuitem" href="/" aria-label="Home">Back</a>
+    </ul>
+    <!-- End of Navigation-->
+
+</body>
+</html>

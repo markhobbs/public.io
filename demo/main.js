@@ -1,5 +1,5 @@
 // main.js
-// Simple JS Racing Game
+// JS Racing Game
 (function () {
     "use strict";
     // State variables
