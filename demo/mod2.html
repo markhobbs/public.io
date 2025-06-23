@@ -38,6 +38,7 @@
     h1 span:nth-child(12) { background-color: #cfcf15 }
     h1 span:nth-child(13) { background-color: #ffff1d }
     h1 span:nth-child(14) { background-color: #cfcfcf }
+    p { word-wrap: break-word; }
     ul#nav-primary {margin-top: 10px; padding: 0; }
     ul#nav-primary li {list-style: none; margin-bottom:12px; }
     a:link { color: #0100ce; }
@@ -102,6 +103,8 @@
         <button id="resetBtn">Reset</button>
       </div>
       <p id="status"></p>
+      <p id="history"></p>
+      <button id="deleteBtn">Delete History</button>
     </main>
     <script type="module">
       class Horse {
@@ -124,6 +127,7 @@
           this.canvas = canvas;
           this.ctx = canvas.getContext('2d');
           this.statusEl = statusEl;
+          this.historyEl = historyEl;
           this.trackLength = trackLength;
           this.horses = horsesData.map((h, i) => new Horse(h.name, h.color, i, trackLength));
           this.raceInterval = null;
@@ -180,6 +184,21 @@
           this.raceInterval = setInterval(() => this.tick(), 100);
         }
 
+        history(winnerName) {
+          const history = storage.getItem("history");
+          let historyStringBuilder =
+            (history
+              ? `${history},${winnerName}`
+              : `${winnerName}`);
+          storage.setItem("history", historyStringBuilder);
+          this.historyEl.textContent = historyStringBuilder;
+        }
+
+        historyDelete() {
+          storage.removeItem("history");
+          this.historyEl.textContent = "";
+        }
+
         tick() {
           this.horses.forEach(h => h.advance());
           this.renderTrack();
@@ -188,6 +207,7 @@
             clearInterval(this.raceInterval);
             this.running = false;
             this.statusEl.textContent = `🏆 ${winner.name} wins!`;
+            this.history(winner.name);
           }
         }
 
@@ -214,11 +234,38 @@
       const TRACK_LENGTH = 100;
 
       const canvas = document.getElementById('raceCanvas');
+      const historyEl = document.getElementById('history');
       const statusEl = document.getElementById('status');
       const game = new Game(canvas, statusEl, HORSES, TRACK_LENGTH);
 
+      // Storage Helper: Fallback for localStorage
+      let storage = {
+          getItem: function (key) {
+              try {
+                  return window.localStorage.getItem(key);
+              } catch (e) {
+                  return storageFallback[key] || null;
+              }
+          },
+          removeItem: function (key) {
+              try {
+                  window.localStorage.removeItem(key);
+              } catch (e) {
+                  delete storageFallback[key];
+              }
+          },
+          setItem: function (key, value) {
+              try {
+                  window.localStorage.setItem(key, value);
+              } catch (e) {
+                  storageFallback[key] = value;
+              }
+          }
+      };
+
       document.getElementById('startBtn').onclick = () => game.startRace();
       document.getElementById('resetBtn').onclick = () => game.resetRace();
+      document.getElementById('deleteBtn').onclick = () => game.historyDelete();
 
       game.renderTrack();
       game.resetRace();
