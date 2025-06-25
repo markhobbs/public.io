@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Spectrum Derby, JavaScript Racing Game. HTML5, ES6 Version. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
+  <meta name="description" content="Spectrum Derby, JavaScript Racing Game. Non Canvas Version. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
   <meta name="keywords" content="HTML, CSS, JavaScript, Spectrum, ZX, Sinclair, sea-side, theme parks, palette">
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Spectrum Derby (HTML5, ES6 Version)</title>
+  <title>Spectrum Derby (Non Canvas Version)</title>
   <style>
     :root {
       --track-length: 80vw;
@@ -14,7 +14,7 @@
     body { 
       background: #ffffff; 
       background-image: radial-gradient(circle at center, #cfcfcf 1px, transparent 1px);
-      background-size: 12px 12px;
+      background-size: 8px 8px;
       font-family: "Lucida Console", "Courier New", monospace; 
     }
     main { max-width: 900px; margin: 2rem auto; }
@@ -26,7 +26,7 @@
       padding: 20px;
       margin: 2rem 0;
       background-image: radial-gradient(circle at center, #ffffff 1px, transparent 1px);
-      background-size: 6px 6px;
+      background-size: 8px 8px;
       border-radius: 1rem;
     }
     .horse-row {
@@ -123,13 +123,25 @@
       <span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><!-- 
       --><span>m</span><span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
     </h1>
-    <p>Spectrum Derby (HTML5, ES6 Version)</p>
+    <p>Spectrum Derby (Non Canvas Version)</p>
     <section class="track" id="track" aria-label="Horse race track"></section>
     <div>
       <button id="startBtn">Start Race</button>
       <button id="resetBtn">Reset</button>
     </div>
     <p id="status" role="status"></p>
+    <p>Performance Comparisons</p>
+    <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
+      <li role="none">
+          <a role="menuitem" href="index-canvas.html" aria-label="Canvas Version">Canvas Version</a>
+      </li>
+      <li role="none">
+          <a role="menuitem" href="index.html" aria-label="Legacy Version">Legacy Version</a>
+      </li>
+      <li role="none">
+        <br>
+        <a role="menuitem" href="/" aria-label="Home">Back</a>
+    </ul>
   </main>
   <script type="module">
     // Config
@@ -216,27 +228,5 @@
     renderTrack();
     resetRace();
   </script>
-  
-  <!-- Navigation -->
-  <p>Performance Comparisons</p>
-  <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
-    <li role="none">
-      <a role="menuitem" href="index.html" aria-label="Legacy Version Inline">Legacy Version (15kb) Inline</a>
-    </li>
-    <li role="none">
-      <a role="menuitem" href="mod0.html" aria-label="Legacy Version Non Inline">Legacy Version (22kb) Non Inline</a>
-    </li>
-    <li role="none">
-      <a role="menuitem" href="mod1.html" aria-label="ES6/HTML5 Version Inline">ES6/HTML5 Version (6kb) Inline</a>
-    </li>
-    <li role="none">
-      <a role="menuitem" href="mod2.html" aria-label="SOLID Canvas Version Inline">SOLID Canvas Version (6kb) Inline</a>
-    </li>
-    <li role="none">
-      <br>
-      <a role="menuitem" href="/" aria-label="Home">Back</a>
-  </ul>
-  <!-- End of Navigation-->
-
 </body>
 </html>

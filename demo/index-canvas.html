@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Spectrum Derby, JavaScript Racing Game. Canvas Version. Inspired by the ZX Sinclair Spectrum colour palette and sea-side theme-parks.">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Spectrum, ZX, Sinclair, sea-side, theme parks, palette">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Spectrum Derby (Canvas Version)</title>
+  <style>body{background:#fff radial-gradient(circle,#cfcfcf 1px,#0000 1px) 0 0/8px 8px;font-family:Lucida Console,Courier New,monospace}main{max-width:900px;margin:2rem auto}#stage{border:2px solid #000;height:500px;margin-bottom:16px;position:relative}#selectors{margin-bottom:24px}canvas{width:100%;height:100%;position:absolute}#game-layer{z-index:2}#background-layer{z-index:1;background:#000 url(data:image/gif;base64,R0lGODlhEAD0AefWAAETAAAUAQAVAAAWAAEYAAEZAQAZBQEaAAAbAAAbAQAdAAAeAAEfAQEgAAIjEAAmAAAnAAEnAQAqAQArAAEtAAAuAAAvAQExAAAyAAAzAAA1AA00BAA8AAI9AAA+AQE/AAFBAAdBAABFAQJHARg+HQBIAAJJAQBLAABNAABOABJIDwBPAABRAABSAABVAABWAAFYAANbAAZbBQJdAB1WEQpdCANiAA9iDgFsAQBuAANtAgRtAAFyAQBzAAtwBgB2AAV4AiFtKTFnOAR6AQN9AAGHAAmGAgWIABmAGgSKAAyIBAuKAwCRAACTABuKJBOPCAySAjqAOBqNGg6TCQiWBSKOJiqMKQeaEAqZFS2OGyWQKACfAASeAUmCTyCTIRuWIRqXGhqYEiWXKCOaEimWLQekCS+WJxudHgCoBBKiIBKkCQSpBheiFCGfGC2aKzmWLxClGFqIZhqjJBamEgWtDg2rCyGjJQaxAB2pDTWeOwCyES2jKBqqIQC1AAC2AguzAQS1DSWoMgC4ACOpMSioLA+yFwW3BQC5AAe3AC+nLhywChWzEBuyCAG6CgO6Awy3Fgq5Bwy5AR6xIxe2AxO2FAi7BgC+BByyLAu7AAG9ERa4AQC/AAS9CxK4EyKxLA26EAe9BAC/Bwm9ABi2HAC/DiaxLg28CQ+8AgDBAADBBQLACgXAAwDCCAm/DgPCAQ69Fgy/Bw6/ABG8HBO8GQfBDQDEBADECwDFAB25JgXDCwzAFRa+CCC6ExK+GBDACgjDBBi8IADFDg3CDyG7GQDHBQbGAhi+Hxm+HADIDwvFDhzADQDKADG5HwDKCwLLACC/JArJBAzIFSDBJBrEHBTIHRrLKP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////yH5BAEKAP8ALAAAAAAQAPQBAAj+AP8JHEiwoMGDCBMqXMiwocOHECNKnEixosWLGDNq3Mixo8ePIEOKHEmypMmTKFOqXMmypcuXMGPKnEkTIgEFChYwUDAAgEAAAgQEKJEFy5UwT6acsQKigQwyUrz42KGI1qpdypL1gmPjAxFcxqQx2dLIVq1QqmCZ0rWmCZpXkEz9UXUIVC5LfkAJUhVNGCdOiPokI+bqVypVrahlMsSJFdpgtli5apbLECBKdGZxClUslSVakg/lYkUKz5AfdXzF+oUqFihMrk4dqlRtDAUPUHhFAhWrEiRfv1ZVKlMER4wWPI5wmaRp0bFGqBwNS6JBgxM3HS4YYcaojp5gztT+LAFyogUhSTNE5FAyZ5rkW0MkpBCTiA+lUV9WWOjxCdSyTTVYgEIVe7DRiSxyuACBDsAgA80dKnQRRAYjtPFMIWnAwMANnjzyCRUkxCEEAhOYAUYpl7yAAA15BDIIEgY4kEAAB3CAghZ2sFBABBh0IEIFBQ2wQBRvmODTQhuE8EBNTDbp5JNQRiklTTfltFNPPwU1VFFHJbVUU09FNVVVV2W1VVdfhTVWWWeltVZbb8U1V1135bVXX38FNlhhhyW2WGOPRTZZZZdltllnn4U2WmmnpbZaa6/FNlttt+W2W2+/BTdcccclt1xzz0U3XXXXZbddd9+FN15556W3Xnv+78U3X3335bdff/8FOGCBBya4YIMPRjhhhRdmuGGHH4Y4Yoknprhiiy/GOGONN+a4Y48/BjlkkUcqlOSSU4Yr7rjklmtuk1XqxNORQAlFlFFIKcWUU1BJRZVVWGnFlVdgiUWWWWipxZZbcMlFl1146cWXX4AJRphhiCnGmGOqQCYZZZZhphlnnoHmimikmYaaaqy5BptstNmGm268+QaccMQZh5xyzDkHnXTUWYeddtx5B5545JmHnnrsuecKfPLRZx9++vHnH4ACEmggggoy6CCEElJoIYYacughiCKSaCKKKrLoIowy0mgjjjry6COQBAlJpJEMfXvu3Xjnrff+3nxflO6V7Gr5bpfyglnvmPiauW+a/rIZ8JsEy3lwnQrj2fCeEPs5caAXE6rxoR0rGnKjJEN68qQqW9pypjBzOvOnNouac6k8o/rzqkK7WnSsSdPK9K1P6yp1r1UDi/WwWxvrdbJhM0v2s2dLq3a1bWML90Byc1u3kn137/334Id/0t/rZukul/F+Sa+Y95apL5r9rgmwmwPHaTCdCd/JsJ4P9ykxoBUTFMYKtTFEeQxkjBrZo0wmqZRVimWYetmmZOapmoUKZ6Ta2al8pqqgtYposDqarJRWq6bhCmq7mpqvrBasrBGLa8f6mrLE1qyyQQtt01qbtdyWrbhti27+SOKe+IZIxCIa8YgCIR+W/tGuLcHLS/MKk73IlK8z8UtN/2qTwOBUsDkhzE4Ly5PD+BSxP1HMYoPKmKE4lqiPLUpkjipZpFBGqZVdymWailmnaAaqm41KZ6bqWaqAxqqhvcpoSJvV0mzltFxFjVdU+9XVhKW1YnUNWWBb1ticZbZopY1abLvW27Q1t24lxG5ITKUqV8lKKCkxcOd7YuHWN8XEve+KjZvfFiN3vy9Wbn9jzNz/zihAz63RgKJLYBxN18A6qi6CeXRdBfsouwwG0nYdLKTuQphIEv6ukSgcXiRZeLxKwnB5maTh8zqJw+mFkofXE0j2gOgtIbbynvhwzKc+YfJK8zmRcOqTIuLcZ0XGyU+LkLOfFymnPzFizn9m5FwaCQi6NiIQjqVjIB1TB0E8to6CfIwdBgFZOw4SMncgROQIfcfIEwoPkis0HiVfqDxMztB5nLyh9EC5Q+uRUntBBNc+h0rUohr1qOALCAA7)}h1{word-wrap:break-word}h1 span{padding:0 2px;font-size:1.6em;animation-name:selectorsFlicker;animation-duration:.3s}h1 span:first-child{color:#fff;background-color:#000}h1 span:nth-child(2){color:#fff;background-color:#0100ce}h1 span:nth-child(3){color:#fff;background-color:#0200fd}h1 span:nth-child(4){color:#fff;background-color:#cf0100}h1 span:nth-child(5){color:#fff;background-color:#ff0201}h1 span:nth-child(6){color:#fff;background-color:#cf01ce}h1 span:nth-child(7){color:#fff;background-color:#ff02fd}h1 span:nth-child(8){color:#fff;background-color:#00cf15}h1 span:nth-child(9){background-color:#00ff1c}h1 span:nth-child(10){background-color:#01cfcf}h1 span:nth-child(11){background-color:#02ffff}h1 span:nth-child(12){background-color:#cfcf15}h1 span:nth-child(13){background-color:#ffff1d}h1 span:nth-child(14){background-color:#cfcfcf}p{word-wrap:break-word;line-height:.9em}ul#nav-primary{margin-top:10px;padding:0}ul#nav-primary li{margin-bottom:12px;list-style:none}a:link{color:#0100ce}a:visited{color:#0200fd}a:hover{color:#00cf15}a:active{color:#00ff1c}button{color:#fff;cursor:pointer;text-transform:uppercase;background-color:#000;border:8px solid #000;min-height:50px;padding:6px 12px;font-size:1.2rem;font-weight:600;animation-name:selectorsFlicker;animation-duration:.3s}button:not(:disabled):hover{color:#000;background-color:#fff;border-color:#000}button:disabled{cursor:default;color:#000;background-color:#fff}button:not(:disabled).warning{background-color:#cf0100}button:not(:disabled).warm{background-color:#00cf15}section#selectors button{color:#000;min-width:136px;min-height:70px;margin:0 2px 2px}section#selectors button.active{border-width:5px;border-color:#d8d800}section#selectors button:not(.winner).loser{color:#000!important;background-color:#fff!important}section#selectors button.winner{background-color:inherit}section#selectors button.dark{color:#fff}section#selectors button:not(.winner):not(.active):not(:disabled):hover{color:#000;border-color:#000;background-color:#fff!important}section#selectors button:disabled.dark,section#selectors button:disabled.dark:hover,.dark,.dark span{color:#fff}@keyframes selectorsFlicker{0%{background-color:#000}12.5%{background-color:#0200fd}25%{background-color:#ff0201}37.5%{background-color:#cf01ce}50%{background-color:#00ff1c}62.5%{background-color:#02ffff}75%{background-color:#ff0}to{background-color:#fff}}</style>
+</head>
+  <body>
+    <noscript>Your browser does not support JavaScript!</noscript>
+    <main>
+      <h1>
+        <span>S</span><span>p</span><span>e</span><span>c</span><span>t</span><span>r</span><span>u</span><!-- 
+        --><span>m</span><span>&nbsp;</span><span>D</span><span>e</span><span>r</span><span>b</span><span>y</span>
+      </h1>
+      <p>Spectrum Derby (Canvas Version)</p>
+      <section id="stage">
+        <!--<canvas id="ui-layer" width="900" height="430">HTML5 Canvas - UI Layer.</canvas>-->
+        <canvas id="game-layer" width="900" height="500">HTML5 Canvas - GAME Layer.</canvas>
+        <canvas id="background-layer" width="900" height="500">HTML5 Canvas - BG Layer.</canvas>
+      </section>
+      <p>
+        <span id="bank"></span> <span id="status"></span>
+      </p>
+      <span id="bank"></p> 
+      <p id="status"></p>
+      <section id="selectors"></section>
+      <section>
+        <button id="startBtn">Start Race</button>
+        <button id="resetBtn">Reset</button>
+        <button id="deleteBtn">Delete History</button>
+      </section>
+      <p id="history"></p>
+      <p>Performance Comparisons</p>
+      <ul id="nav-primary" role="menu" aria-label="Game Alternatives">
+        <li role="none">
+            <a role="menuitem" href="index-canvas.html" aria-label="Canvas Version">Canvas Version</a>
+        </li>
+        <li role="none">
+            <a role="menuitem" href="index.html" aria-label="Legacy Version">Legacy Version</a>
+        </li>
+        <li role="none">
+          <br>
+          <a role="menuitem" href="/" aria-label="Home">Back</a>
+      </ul>
+    </main>
+    <script type="module">  
+      class Horse {
+        constructor(name, color, dark, index, trackLength) {
+          this.name = name;
+          this.color = color;
+          this.dark = dark;
+          this.index = index;
+          this.position = 0;
+          this.trackLength = trackLength;
+        }
+        advance() {
+          this.position += Math.random() * 6 + 1;
+          if (this.position > this.trackLength) this.position = this.trackLength;
+        }
+        reset() { this.position = 0; }
+      }
+
+      class Selector {
+        constructor(name, color, dark, index) {
+          this.name = name;
+          this.color = color;
+          this.dark = dark;
+          this.index = index;
+        }
+      }
+
+      class Game {
+        constructor(canvas, bank, bankEl, historyEl, selectorsEl, statusEl, horsesData, trackLength) {
+          this.canvas = canvas;
+          this.ctx = canvas.getContext('2d', { alpha: false });
+          this.bank = bank;
+          this.bankEl = bankEl;
+          this.historyEl = historyEl;
+          this.horseRadius = 20;
+          this.horses = horsesData.map((h, i) => new Horse(h.name, h.color, h.dark, i, trackLength));
+          this.selectors = horsesData.map((h, i) => new Selector(h.name, h.color, h.dark, i));
+          this.selectorsEl = selectorsEl;
+          this.raceInterval = null;
+          this.running = false;
+          //this.selected = horsesData[Math.floor(Math.random() * horsesData.length)].name;
+          this.selected = "Black";
+          this.statusEl = statusEl;
+          this.trackLength = trackLength;
+          this.trackPadding = 40;
+          this.finishLineX = canvas.width - this.trackPadding;
+        }
+
+        renderTrack() {
+          const { ctx, canvas, horses, trackPadding, horseRadius } = this;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          horses.forEach((horse, i) => {
+            // Track
+            const y = trackPadding + i * (2.5 * horseRadius) + 50;
+            ctx.strokeStyle = '#00ff1c';
+            ctx.lineWidth = 3;
+            //ctx.beginPath();
+            ctx.moveTo(trackPadding, y);
+            ctx.lineTo(this.finishLineX, y);
+            ctx.stroke();
+            // Horse
+            const percent = horse.position / this.trackLength;
+            const x = trackPadding + percent * (this.finishLineX - trackPadding);
+            // ctx.beginPath();
+            // ctx.arc(x, y, horseRadius, 0, 2 * Math.PI);
+            // ctx.fill();
+            ctx.fillStyle = horse.color;
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#cfcfcf";
+            ctx.strokeRect(x-20, y-20, 40, 40);
+            ctx.fillRect(x-20, y-20, 40, 40);
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = (horse.name === this.selected) ? "#cfcf15" : "#cfcfcf";
+            ctx.fillRect(x-20, y-20, 40, 40);
+            ctx.strokeRect(x-20, y-20, 40, 40);
+            ctx.fillStyle = (horse.dark === true) ? "#ffffff" : "#000000";
+            ctx.font = "bold 20px sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(horse.name[0], x, y);
+
+            // Finish line
+            ctx.save();
+            ctx.strokeStyle = "#222";
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(this.finishLineX, trackPadding - horseRadius);
+            ctx.lineTo(this.finishLineX, canvas.height - trackPadding + horseRadius);
+            ctx.stroke();
+            ctx.restore();
+          });
+          // Bank
+          ctx.fillStyle = '#ffff1d';
+          ctx.fillText(`${this.bank} Credits Remaining`, 730, 45);
+          ctx.fillStyle = '#cfcf15';
+          ctx.fillText(`${this.bank} Credits Remaining`, 731, 46);
+        }
+
+        renderSelectors() {
+          const { selectors, dark } = this;
+          let htmlSelectors = "";
+          selectors.forEach((selector, i) => {
+            var strClassDark = (selector.dark ? " dark" : "");
+            var strClassActive = (this.selected === selector.name ? " active" : "");
+            htmlSelectors += 
+              `<button 
+                style="background-color:${selector.color}"
+                class="selector${strClassDark}${strClassActive}"
+                name="${selector.name}">
+                ${selector.name}
+              </button>`;
+          })
+          this.selectorsEl.innerHTML = htmlSelectors;
+        }
+
+        selectHorse(color) {
+          this.selected = color;
+          this.renderTrack();
+          this.renderSelectors();
+          this.listnersSelectors();
+        }
+
+        listnersSelectors() {
+          const inputs = selectorsEl.querySelectorAll("button");
+          for (const input of inputs) {
+            input.addEventListener("click", (evt) => {
+              this.selectHorse(evt.target.name);
+            }, false);
+          }
+        }
+
+        startRace() {
+          if (this.running) return;
+          this.running = true;
+          this.statusEl.textContent = "Race in progress...";
+          this.horses.forEach(h => h.reset());
+          this.renderTrack();
+          this.raceInterval = setInterval(() => this.tick(), 100);
+        }
+
+        history(winnerName) {
+          const history = storage.getItem("history");
+          let historyStringBuilder =
+            (history
+              ? `${history},${winnerName}`
+              : `${winnerName}`);
+          storage.setItem("history", historyStringBuilder);
+          this.historyEl.textContent = historyStringBuilder;
+        }
+
+        historyDelete() {
+          storage.removeItem("history");
+          this.historyEl.textContent = "";
+        }
+
+        tick() {
+          this.horses.forEach(h => h.advance());
+          this.renderTrack();
+          const winner = this.horses.find(h => h.position >= this.trackLength);
+          if (winner) {
+            clearInterval(this.raceInterval);
+            this.running = false;
+            this.statusEl.textContent = `🏆 ${winner.name} wins!`;
+            if (this.selected === winner.name){
+              this.bank = this.bank + 10;
+            } else {
+              this.bank--;
+            }
+            this.bankEl.textContent = `Bank ${this.bank} Credits. `;
+            this.history(winner.name);
+          }
+        }
+
+        resetRace() {
+          clearInterval(this.raceInterval);
+          this.running = false;
+          this.horses.forEach(h => h.reset());
+          this.renderTrack();
+          this.statusEl.textContent = "Ready for the next race! Win 10 credits, 1 credit per game.";
+          this.bankEl.textContent = `Bank ${this.bank} Credits. `;
+        }
+      }
+
+      // Config
+      const HORSES = [
+        { color: "#000000", dark: true, id: 200, name: "Black" },
+        { color: "#0200fd", dark: true, id: 100, name: "Blue" },
+        { color: "#ff0201", dark: false, id: 50, name: "Red" },
+        { color: "#ff02fd", dark: false, id: 20, name: "Magenta" },
+        { color: "#00ff1c", dark: false, id: 10, name: "Green" },
+        { color: "#02ffff", dark: false, id: 5, name: "Cyan" },
+        { color: "#ffff1d", dark: false, id: 2, name: "Yellow" },
+        { color: "#cfcfcf", dark: false, id: 1, name: "White" }
+      ];
+      const BANK = 200;
+      const TRACK_LENGTH = 100;
+
+      const canvas = document.getElementById('game-layer');
+      const bankEl = document.getElementById('bank');
+      const historyEl = document.getElementById('history');
+      const statusEl = document.getElementById('status');
+      const selectorsEl = document.getElementById('selectors');
+
+      // Storage Helper: Fallback for localStorage
+      let storage = {
+          getItem: function (key) {
+              try {
+                  return window.localStorage.getItem(key);
+              } catch (e) {
+                  return storageFallback[key] || null;
+              }
+          },
+          removeItem: function (key) {
+              try {
+                  window.localStorage.removeItem(key);
+              } catch (e) {
+                  delete storageFallback[key];
+              }
+          },
+          setItem: function (key, value) {
+              try {
+                  window.localStorage.setItem(key, value);
+              } catch (e) {
+                  storageFallback[key] = value;
+              }
+          }
+      };
+      if (canvas.getContext) {
+        const game = new Game(canvas, BANK, bankEl, historyEl, selectorsEl, statusEl, HORSES, TRACK_LENGTH);
+
+        document.getElementById('startBtn').onclick = () => game.startRace();
+        document.getElementById('resetBtn').onclick = () => game.resetRace();
+        document.getElementById('deleteBtn').onclick = () => game.historyDelete();
+
+        game.renderTrack();
+        game.resetRace();
+        game.renderSelectors();
+        game.listnersSelectors();
+
+      } else {
+        alert("Please use a Canvas supported browser.");
+      }
+      </script>
+  </body>
+</html>

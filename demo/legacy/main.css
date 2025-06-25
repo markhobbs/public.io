@@ -2,7 +2,7 @@
 body {
   background: #ffffff; 
   background-image: radial-gradient(circle at center, #cfcfcf 1px, transparent 1px);
-  background-size: 12px 12px;
+  background-size: 8px 8px;
   font-family: "Lucida Console", "Courier New", monospace;
   /*background-image: repeating-linear-gradient(45deg, #d8d8d8 0, #d8d8d8 1px, transparent 0, transparent 50%);
   background-size: 9px 9px;
@@ -14,7 +14,7 @@ body,
 }
 
 .ground {
-  background-size: 6px 6px;
+  background-size: 8px 8px;
 }
 
 #container-app-1 {
