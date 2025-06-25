@@ -24,11 +24,12 @@ body,
 
 h1 {
   word-wrap: break-word;
+  display: inline-block;
 }
 h1 span {
   font-size: 1.6em;
   border-color: #000000;
-  padding: 0 2px;
+  padding: 0 4px;
   animation-name: selectorsFlicker;
   animation-duration: 0.3s;
 }
@@ -86,17 +87,20 @@ h1 span:nth-child(14) {
 
 button {
   background-color: #000000;
-  border: 1px solid #000000;
+  border: 8px solid #000000;
   border-color: #000000;
   color: #ffffff;
   cursor: pointer;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 800;
   min-height: 50px;
-  padding: 6px 12px;
+  padding: 4px 8px;
   text-transform: uppercase;
   animation-name: selectorsFlicker;
   animation-duration: 0.3s;
+}
+button sup {
+  font-size: 0.5em;
 }
 button:not(:disabled):hover {
   background-color: #ffffff;
@@ -116,19 +120,20 @@ button:not(:disabled).warm {
 }
 
 em {
-  font-size: 80%;
+  font-size: 0.9em;
 }
 
 #bank {
   background-color: transparent;
   border: none;
-  font-size: 1.8em;
+  color: white !important;
+  font-size: 2em;
 }
 
 .ground {
   display: flex;
-  background-color: #d8d800;
-  border: 1px solid #000000;
+  background-color: #000000;
+  border: 8px solid #000000;
   flex-wrap: wrap;
   min-height: 215px;
   position: relative; 
@@ -137,17 +142,26 @@ em {
   margin: 0;
 }
 .ground > div:nth-child(2) {
-  width: 25%;
+  width: 33.33%;
 }
 .ground > div:nth-child(2) {
   min-height: 60px;
 }
+.ground #message,
 .ground > div:nth-child(2) #bank,
 .ground > div:nth-child(2) label {
-  padding-left: 4px;
+  color: white;
+  display: block;
+  font-weight: 600;
+}
+.ground > div:nth-child(2) #bank,
+.ground > div:nth-child(2) label {
+  padding-left: 8px;
+}
+.ground > div:nth-child(2) label {
+  margin-top: 8px;
 }
 .ground > div:nth-child(2) #bank {
-  color: black;
   font-weight: 600;
   padding-left: 4px;
 }
@@ -163,21 +177,21 @@ em {
       linear-gradient(135deg, #00ff1c 26%, transparent 26%),
       linear-gradient(45deg, transparent 75%, #d8d800 75%),
       linear-gradient(135deg, transparent 75%, #00cf15 75%);
-  background-size: 20px 20px; /* Must be a square */
+  background-size: 8px 8px; /* Must be a square */
   background-position: 0 0, 10px 0, 10px -10px, 0px 10px; /* Must be half of one side of the square */
-  border-left: 5px solid #d8d800;
-  border-right: 5px solid #d8d800;
+  border-left: 8px solid #d8d800;
+  border-right: 8px solid #d8d800;
   overflow: hidden;
 }
 #lanes.race-progress {
   animation: Move 30s ease infinite;
 }
 #lanes > div {
-  border: 1px solid #000000;
+  border: 2px solid #000000;
   font-size: 12px;  
-  height: 28px;
+  height: 32px;
   position: relative;
-  width: 2px;
+  width: 4px;
 }
 #lanes > div.active {
   border-color: #d8d800 !important;
@@ -186,7 +200,7 @@ em {
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 4px;
-  min-width: 30px;
+  min-width: 32px;
   padding: 0 4px 0 20px;
 }
 #lanes > div.active span {
@@ -196,8 +210,8 @@ em {
 }
 #lanes > div:after {
   position: absolute;
-  right: -14px;
-  scale: 110%;
+  right: -16px;
+  scale: 112%;
   top: 0;
 }
 #lanes > div:after {
@@ -208,9 +222,10 @@ em {
 }
 
 #message {
+  font-size: 1.3em;
   margin: 0;
   padding-top: 4px;
-  width: 75%;
+  width: 66.66%;
 }
 
 .track {
@@ -228,7 +243,7 @@ em {
   content: "Finish";
   display: block;
   font-weight: 600;
-  padding: 4px 16px;
+  padding: 4px 8px;
   position: absolute;
   right: -16px;
   transform: rotate(90deg);
@@ -252,7 +267,6 @@ ul#nav-primary li {
 }
 #selectors button.active {
   border-color: #d8d800;
-  border-width: 5px;
 }
 #selectors button:not(.winner).loser {
   background-color: white !important;
@@ -293,8 +307,6 @@ ul#nav-primary li {
   #selectors button {
     flex: 0 0 33.333%;
     min-width: unset;
-    outline: 0.5px solid #ffffff;
-    outline-offset: -0.5px;
   }
 }
 @media only screen and (min-width: 601px) {
